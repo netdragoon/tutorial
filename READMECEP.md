@@ -4,17 +4,20 @@ __Web Service http://viacep.com.br/__
 
 [![Canducci Cep](http://i666.photobucket.com/albums/vv25/netdragoon/cep_zpsoqtae5hr.png)](https://www.nuget.org/packages/CanducciCep/)
 
-Instalação do Pacote (NUGET)
+##Instalação do Pacote (NUGET)
 
 ```Csharp
 PM> Install-Package CanducciCep
 ```
 
-Como utilizar
+##Como utilizar?
 
-Declare seu namespace `using Canducci.Zip;`. Após a declaração faça a pesquisa do CEP dessa forma:
+Declare o namespace `using Canducci.Zip;` 
+
+###Busca das informações pelo CEP informado?
 
 ```Csharp
+
 try
 {
 	
@@ -25,11 +28,39 @@ try
     {
 
         //código postal encontrado ...
-        
+
     }
 }
 catch (ZipCodeException ex)
 {
     throw ex;
 }
+
+```
+
+###Busca de vários CEP informado UF, Cidade e Endereço?
+
+```Csharp
+
+try
+{
+
+	//Observações
+	//Cidade com no minimo 3 letras
+	//Endereço com minimo 3 letras
+	
+	//Método Address só retorna os 100 primeiros registros.
+    ZipCodeInfo[] zips = ZipCodeLoad.Address(ZipCodeUF.SP, "São Paulo", "Ave");
+
+    if (zips.Count() > 0)
+    {
+
+    }
+
+}
+catch (ZipCodeException ex)
+{
+    throw ex;
+}
+
 ```
