@@ -12,7 +12,9 @@ __Web Service Yahoo http://viacep.com.br/__
 ##Instalação do Pacote (NUGET)
 
 ```Csharp
+
 PM> Install-Package CanducciQuoteDolar
+
 ```
 
 ##Como utilizar?
@@ -29,7 +31,8 @@ try
         DolarInfo dolarInfo = dolar.DolarInfo();
         //Dolar no Brasil
         RatesInfo rateInfoUSDBRL = dolarInfo.RatesInfo.GetRatesInfo(RatesInfoType.USDBRL);
-
+        //rateInfoUSDBRL.Bid (Compra)
+        //rateInfoUSDBRL.Ask (Venda)
     }
 }
 catch (Exception ex)
