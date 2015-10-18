@@ -1,5 +1,7 @@
 #Canducci MongoDB Repository .NET 4.0
 
+###ASP.NET MVC 4
+
 [![Canducci MongoDB Repository .NET 4.0](http://i666.photobucket.com/albums/vv25/netdragoon/nosql_zpsefi6szxd.png)](https://www.nuget.org/packages/Canducci.MongoDB.Repository4.0/)
 
 ##Instalação do Pacote (NUGET)
@@ -24,7 +26,7 @@ Crie em seu Web.config em `appSettings` duas configurações (MongoConnectionStr
 
 essas configurações são responsável a conexão da camada ___Repository___.
 
-Faça uma classe que representa a sua Collection no MongoDB
+___Faça uma classe que representa a sua Collection no MongoDB___
 
 ```Csharp
 
