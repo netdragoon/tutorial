@@ -3,7 +3,7 @@
 ###(version: 1.0.0)
 
 
-__Web Service Yahoo http://viacep.com.br/__
+__Web Service Yahoo__
 
 ##[Demo](http://canduccipackages.apphb.com/#/)
 
