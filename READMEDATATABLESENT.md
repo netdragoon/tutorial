@@ -229,3 +229,114 @@ que gera um `table` conforme as configurações.
 __Resultado__
 
 ![Resultados](http://i666.photobucket.com/albums/vv25/netdragoon/newtela_zpsl5of38wm.png)
+
+__Exemplo Simples__
+
+###Controller
+
+```Csharp
+
+namespace WebApplication1.Controllers
+{
+    public class TestController : Controller
+    {
+
+        [HttpGet()]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost()]
+        public JsonResult Index(DataTablesConfig Config)
+        {
+            IDataTablesResult _result = null;
+
+            using (myDataBaseEntities db = new myDataBaseEntities())
+            {
+
+                _result = db.Peoples.ToDataTables(Config);
+            }               
+
+            return Json(_result, JsonRequestBehavior.DenyGet);
+
+        }
+    }
+}
+
+```
+
+###View
+
+```Csharp
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+</head>
+<body>
+    <div> 
+        @Html.DataTablesHtml("example", "table table-striped", false, "Id", "Name")
+    </div>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "lengthChange": false,
+                "searching": false,
+                "ajax": {
+                    "url": "@Url.Action("Index")",
+                    "type": "POST",
+                    "data": function (d) { }
+                },
+                "pageLength": 10,
+                "rowId": 'Id',
+                "columns": [
+                    { "data": "Id", "Name": "Id" },
+                    { "data": "Name", "Name": "Name" }],
+                "language":
+                    {
+                        "sEmptyTable": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sInfoThousands": ".",
+                        "sLengthMenu": "_MENU_ resultados por página",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sSearch": "Pesquisar",
+                        "oPaginate": {
+                            "sNext": "Próximo",
+                            "sPrevious": "Anterior",
+                            "sFirst": "Primeiro",
+                            "sLast": "Último"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Ordenar colunas de forma ascendente",
+                            "sSortDescending": ": Ordenar colunas de forma descendente"
+                        }
+                    }
+            });            
+        });
+    </script>
+</body>
+</html>
+
+
+```
