@@ -84,7 +84,7 @@ public JsonResult PeoplesToResult(DataTablesConfig config)
 
 A classe `DataTablesConfig` `config` é responsável em resgatar os dados enviados via post pelo
 `jquery.datatables`. Além disso o método extensivo `ToDataTables` tem a obrigação de pegar essas
-configurações e gerar o resultado esperado pelo `jquery.datatables`, inclusive ele gera automáticamente ordernação, então, se preocupe em criar os dados que serão enviados para tela, e o filtro (`Where`), o `OrderBy` é feito automáticamente pelo `ToDataTables`.
+configurações e gerar o resultado esperado pelo `jquery.datatables`, gerando automáticamente à ordernação, então, se preocupe em criar os dados que serão enviados para tela, e o filtro (`Where`), o `OrderBy` é feito automáticamente pelo `ToDataTables`.
 
 __View__
 
