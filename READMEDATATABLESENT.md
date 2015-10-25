@@ -227,4 +227,4 @@ que gera um `table` conforme as configurações.
 
 __Resultado__
 
-http://i666.photobucket.com/albums/vv25/netdragoon/newtela_zpsl5of38wm.png
+![Resultados](http://i666.photobucket.com/albums/vv25/netdragoon/newtela_zpsl5of38wm.png)
