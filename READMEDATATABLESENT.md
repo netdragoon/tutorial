@@ -129,7 +129,8 @@ que gera um `table` conforme as configurações.
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" name="TxtFiltro" id="TxtFiltro" class="form-control" placeholder="Filtro: Nome" />
+                <input type="text" name="TxtFiltro" id="TxtFiltro" 
+                    class="form-control" placeholder="Filtro: Nome" />
             </div>
             <button type="button" name="BtnPesquisar" id="BtnPesquisar" class="btn btn-info">Pesquisar</button>
         </div>        
