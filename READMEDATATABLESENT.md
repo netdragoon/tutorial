@@ -84,9 +84,22 @@ public JsonResult PeoplesToResult(DataTablesConfig config)
 
 A classe `DataTablesConfig` `config` é responsável em resgatar os dados enviados via post pelo
 `jquery.datatables`. Além disso o método extensivo `ToDataTables` tem a obrigação de pegar essas
-configurações e gerar o resultado esperado pelo `jquery.datatables`, gerando automáticamente à ordernação, então, se preocupe em criar os dados que serão enviados para tela, e o filtro (`Where`), o `OrderBy` é feito automáticamente pelo `ToDataTables`.
+configurações e gerar o resultado esperado pelo `jquery.datatables`, gerando automáticamente à ordernação, então, se preocupe em criar os dados que serão enviados e o filtro (`Where`), o `OrderBy` é feito automáticamente pelo método `ToDataTables`.
 
 __View__
+
+Na `view` existe um método assim: 
+
+```Csharp
+@Html.DataTablesHtml("example", "table table-striped", false, "Id", "Name", "Editar")
+
+```
+que gera um `table` conforme as configurações. 
+
+ - "example" que é o `id` da sua `table` exemplo: `<table id="example"`,
+ - "table table-striped" é suas classes CSS exemplo: `class="table table-striped"`,
+ - false que significa mostrar ou não o rodapé da sua `table`,
+ - e daí pra frente são as colunas que no caso são 2 mais o editar (3 colunas) da sua `table`.
 
 ```Csharp
 
@@ -146,7 +159,8 @@ __View__
                         "orderable": false,
                         "defaultContent": '',
                         "render": function (data, type, row) {
-                            return '<a href="/Pagina/Edit/' + data.Id + '" class="btn btn-success btn-block">Alterar</a>';
+                            return '<a href="/Pagina/Edit/' + data.Id + 
+                                '" class="btn btn-success btn-block">Alterar</a>';
                         }
                     }],
                 "language": 
@@ -210,3 +224,7 @@ __View__
 </html>
 
 ```
+
+__Resultado__
+
+(http://i666.photobucket.com/albums/vv25/netdragoon/newtela_zpsl5of38wm.png)
