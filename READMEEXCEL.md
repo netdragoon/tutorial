@@ -215,7 +215,8 @@ public FileContentResult CreateExcel1()
 
 }
 ```
-Observações:
+
+####Observações:
 
 - Não é obrigatório o uso da classe `HeaderCollection`, mas, é uma forma de configuração do titulo e ordem de cada coluna. A ordem dos valores também deve seguir a mesma ordem do que foi colocado em cada titulo sempre começando do número 1 (ex. 1,2,3, sendo que menores ou igual a 0 (zero) causa um Exception (erro)).
 
@@ -232,4 +233,4 @@ No exemplo acima foi criado duas colunas começando pela Departamento e a próxi
 
 - O pacote não tem formatação de layout (apesar que o titulo é centralizado por padrão e as colunas seguem a formatação de acordo com o tipo enviado), fontes, cores, etc., a preocupação dele é somente só o envio de uma informação para ser modificada em um arquivo do excel.
 
-- O arquivo gerado é 100% compativel com __Microsoft Office Excel___
+- O arquivo gerado é 100% compativel com ___Microsoft Office Excel___
