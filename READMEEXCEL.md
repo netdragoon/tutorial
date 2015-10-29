@@ -15,7 +15,7 @@
 - HeaderCollection
 - ListToExcel
 
-3) Metodos Extensivos para IEnumerable, IEnumerable<T>, IQueryable e IQueryable<T>
+3) Metodos Extensivos para `IEnumerable`, `IEnumerable<T>`, `IQueryable` e `IQueryable<T>`
 - bool ToExcelSaveAs<T>
 - byte[] ToExcelByte<T>
 
