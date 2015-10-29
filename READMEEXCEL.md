@@ -215,3 +215,21 @@ public FileContentResult CreateExcel1()
 
 }
 ```
+Observações:
+
+- Não é obrigatório o uso da classe `HeaderCollection`, mas, é uma forma de configuração do titulo e ordem de cada coluna. A ordem dos valores também deve seguir a mesma ordem do que foi colocado em cada titulo sempre começando do número 1 (ex. 1,2,3, sendo que menores ou igual a 0 (zero) causa um Exception (erro)).
+
+___Exemplo:___
+
+```csharp
+IHeaderCollection Headers = HeaderCollection.Create();
+Headers.Add(Header.Create("Departamento", 1));
+Headers.Add(Header.Create("Razão Social", 2));
+```
+No exemplo acima foi criado duas colunas começando pela Departamento e a próxima Razão Social.
+
+- O arquivo gerado em Excel tem como finalidade o transporte simples de cada informação, tendo o seu tipo de cada linha e coluna correspondente ao que foi enviado. 
+
+- O pacote não tem formatação de layout (apesar que o titulo é centralizado por padrão e as colunas seguem a formatação de acordo com o tipo enviado), fontes, cores, etc., a preocupação dele é somente só o envio de uma informação para ser modificada em um arquivo do excel.
+
+- O arquivo gerado é 100% compativel com __Microsoft Office Excel___
