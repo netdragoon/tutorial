@@ -67,7 +67,7 @@ tests.ToExcelSaveAs("Result\\List.xlsx", headers);
 
 ##Entity Framework (IQueryable e IEnumberable)
 
-__Simples Console ou Desktop
+__Simples Console ou Desktop__
 
 ```Csharp
 using (AdventureWorks2014Entities db = new AdventureWorks2014Entities())
