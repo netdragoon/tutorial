@@ -4,18 +4,19 @@
 
 [![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1446163380_excel_zps5lhqezet.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
 
-##Classes
-1) Interfaces
+###Classes
+
+__1) Interfaces__
 - IHeader
 - IHeaderCollection
 - IListToExcel
 
-2) Classes Concretas
+__2) Classes Concretas__
 - Header
 - HeaderCollection
 - ListToExcel
 
-3) Metodos Extensivos para `IEnumerable`, `IEnumerable<T>`, `IQueryable` e `IQueryable<T>`
+__3) Metodos Extensivos para__ `IEnumerable`, `IEnumerable<T>`, `IQueryable` e `IQueryable<T>`
 - bool ToExcelSaveAs<T>
 - byte[] ToExcelByte<T>
 
