@@ -1,24 +1,27 @@
-#Canducci EXCEL 
+##Canducci EXCEL 
 
-###(version: 1.0.0)
+####(version: 1.0.0)
 
 [![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1446163380_excel_zps5lhqezet.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
 
 ###Classes
 
 __1) Interfaces__
-- IHeader
-- IHeaderCollection
-- IListToExcel
+
+- `IHeader`
+- `IHeaderCollection`
+- `IListToExcel`
 
 __2) Classes Concretas__
-- Header
-- HeaderCollection
-- ListToExcel
+
+- `Header`
+- `HeaderCollection`
+- `ListToExcel`
 
 __3) Metodos Extensivos para__ `IEnumerable`, `IEnumerable<T>`, `IQueryable` e `IQueryable<T>`
-- bool ToExcelSaveAs<T>
-- byte[] ToExcelByte<T>
+
+- `bool ToExcelSaveAs<T>`
+- `byte[] ToExcelByte<T>`
 
 ##Instalação do Pacote (NUGET)
 
@@ -146,9 +149,9 @@ public FileContentResult CreateExcel()
         //Configurando o cabeçalho
         IHeaderCollection headers = HeaderCollection.Create();
         headers.Add(Header.Create("Id", 1));
-        headers.Add(Header.Create("Idade", 2));
-        headers.Add(Header.Create("Data de Fogo", 3));
-        headers.Add(Header.Create("Trabalho Candidatura", 4));
+        headers.Add(Header.Create("Sexo", 2));
+        headers.Add(Header.Create("Data", 3));
+        headers.Add(Header.Create("Trabalho", 4));
 
         //Usando o método extensivo para gerar um array de bytes em memória
         //pelo método extensivo ToExcelByte
@@ -209,6 +212,6 @@ public FileContentResult CreateExcel1()
     //O navegador fará um download do arquivo 
     //e você pode abrir no seu aplicativo Excel
     return File(fileByte, ContentTypeExcel.xlsx);
-    
+
 }
 ```
