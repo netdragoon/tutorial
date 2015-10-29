@@ -2,10 +2,22 @@
 
 ###(version: 1.0.0)
 
+[![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1446163380_excel_zps5lhqezet.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
 
-##[Demo](http://canduccipackages.apphb.com/#/)
+##Classes
+1) Interfaces
+- IHeader
+- IHeaderCollection
+- IListToExcel
 
-[![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1430207215_money-increase-64_zps3sjc4h5j.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
+2) Classes Concretas
+- Header
+- HeaderCollection
+- ListToExcel
+
+3) Metodos Extensivos para IEnumerable, IEnumerable<T>, IQueryable e IQueryable<T>
+- bool ToExcelSaveAs<T>
+- byte[] ToExcelByte<T>
 
 ##Instalação do Pacote (NUGET)
 
