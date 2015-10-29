@@ -2,7 +2,7 @@
 
 ####(version: 1.0.0)
 
-[![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1446163380_excel_zps5lhqezet.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
+[![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1446163380_excel_zps5lhqezet.png)](https://www.nuget.org/packages/Canducci.Excel/)
 
 ###Classes
 
@@ -104,7 +104,7 @@ tests.ToExcelSaveAs("Result\\List.xlsx", headers);
 
 ```
 
-##Entity Framework (IQueryable e IEnumberable)
+##Entity Framework (IQueryable e IEnumerable)
 
 __Simples Console ou Desktop__
 
