@@ -27,7 +27,7 @@ __3) Metodos Extensivos para__ `IEnumerable`, `IEnumerable<T>`, `IQueryable` e `
 
 ```Csharp
 
-PM> Install-Package CanducciQuoteDolar
+PM> Install-Package Canducci.Excel
 
 ```
 
