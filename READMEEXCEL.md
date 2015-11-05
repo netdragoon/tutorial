@@ -216,6 +216,37 @@ public FileContentResult CreateExcel1()
 }
 ```
 
+__ASP.NET WebForms__
+
+```Csharp
+protected void BtnEnviar_Click(object sender, EventArgs e)
+{
+    var Items = new[]
+    {
+        new {Id  = 1, Name = "Id 1", Value = 150.00M},
+        new {Id  = 2, Name = "Id 2", Value = 250.25M},
+        new {Id  = 3, Name = "Id 3", Value = 450.00M}
+    }.ToArray();
+
+    byte[] ArrayOfBytes = Items.ToExcelByte();
+
+
+    Response.ClearContent();
+    Response.ClearHeaders();
+    
+
+    Response.AddHeader("content-disposition", "attachment; filename=file.xls");
+
+    Response.ContentType = "application/ms-excel";
+
+    Response.BinaryWrite(ArrayOfBytes);
+
+    Response.End();
+    
+}
+
+```
+
 ####Observações:
 
 - Não é obrigatório o uso da classe `HeaderCollection`, mas, é uma forma de configuração do titulo e ordem de cada coluna. A ordem dos valores também deve seguir a mesma ordem do que foi colocado em cada titulo sempre começando do número 1 (ex. 1,2,3, sendo que menores ou igual a 0 (zero) causa um Exception (erro)).
