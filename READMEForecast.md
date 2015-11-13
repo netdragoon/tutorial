@@ -48,9 +48,9 @@ catch (CityForecastException ex)
 
 ```
 
-Nota: para versão NET 4.5 e superiores possui os métodos `Async`.
+Nota: ___para versão NET 4.5 e superiores possui os métodos___ `Async`.
 
-Modelo de Resposta da classe Prevision e Days
+###Modelo de Resposta da classe Prevision e Days
 
 ___Prevision___
 
@@ -71,7 +71,7 @@ ___Days___
 Classe que possui as datas relativas a previsão do tempo.
 
 ```Csharp
-public class Days : Interfaces.IDays
+public class Days : IDays
 {    
     public DateTime Data { get; set; }
     public string Time { get;set; }
