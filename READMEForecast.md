@@ -54,7 +54,8 @@ Modelo de Resposta da classe Prevision e Days
 
 ___Prevision___
 
-Classe que tem as informações da cidade e ultima utilização
+Classe que tem as informações da cidade e ultima atualização
+ da Previsão do tempo
 
 ```Csharp
 public class Prevision : IPrevision
