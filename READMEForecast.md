@@ -47,3 +47,37 @@ catch (CityForecastException ex)
 }
 
 ```
+
+Nota: para versão NET 4.5 e superiores possui os métodos `Async`.
+
+Modelo de Resposta da classe Prevision e Days
+
+___Prevision__
+
+Classe que tem as informações da cidade e ultima utilização
+
+```Csharp
+public class Prevision : IPrevision
+{    
+    public string Name { get; set; }
+    public string Uf { get; set; }
+    public DateTime Updated { get; set; }
+    public List<Days> Days { get; set; }
+}
+```
+___Days___
+
+Classe que possui as datas relativas a previsão do tempo.
+
+```Csharp
+public class Days : Interfaces.IDays
+{    
+    public DateTime Data { get; set; }
+    public string Time { get;set; }
+    public Term TimeTerm { get; private set; }
+    public decimal Max { get; set; }
+    public decimal Min { get; set; }
+    public decimal Iuv { get; set; }
+}
+
+```
