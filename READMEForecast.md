@@ -52,7 +52,7 @@ Nota: para versão NET 4.5 e superiores possui os métodos `Async`.
 
 Modelo de Resposta da classe Prevision e Days
 
-___Prevision__
+___Prevision___
 
 Classe que tem as informações da cidade e ultima utilização
 
