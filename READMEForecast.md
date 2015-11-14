@@ -110,6 +110,43 @@ public static class Methods
 }
 
 ```
+###Modelo de Resposta da classe Cities e City
+
+___Cities___
+
+Classe que tem as informações das cidades seguindo o modelo de cidade.
+
+```Csharp
+
+public class Cities : Interfaces.ICities
+{
+    public Cities()
+    {
+        Citys = new List<City>();
+    }
+    public List<City> Citys { get; set; }
+    public long Count
+    {
+        get
+        {
+            return Citys.Count;
+        }
+    }
+}
+```
+
+___City___
+
+```Csharp
+public class City : Interfaces.ICity
+{    
+    public int Id { get; set; } 
+    public string Name { get; set; }
+    public string Uf { get; set; }
+}
+
+```
+
 ###Modelo de Resposta da classe Prevision e Days
 
 ___Prevision___
