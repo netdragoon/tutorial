@@ -92,7 +92,24 @@ public async Task<JsonResult> ForecastPrevision(int? Id, int? Count = 4)
 }
 
 ```
+Observação: Quando for resgatar as cidades o texto informado não pode ser acentuado, então
+use a `class` logo abaixo como método de extensão para remover os acentos:
 
+```Csharp
+public static class Methods
+{
+    public static string WithoutAccents(this string texto)
+    {
+        if (string.IsNullOrEmpty(texto))
+        {
+            return string.Empty;
+        }
+        byte[] bytes = System.Text.Encoding.GetEncoding("iso-8859-8").GetBytes(texto);
+        return System.Text.Encoding.UTF8.GetString(bytes);
+    }
+}
+
+```
 ###Modelo de Resposta da classe Prevision e Days
 
 ___Prevision___
