@@ -50,6 +50,46 @@ catch (CityForecastException ex)
 
 Nota: ___para versão NET 4.5 e superiores possui os métodos___ `Async`.
 
+
+Exemplo MVC com Async
+
+
+```Csharp
+[HttpPost]
+[Route("cities")]
+public async Task<JsonResult> ForecastCities(string name)
+{
+   
+    if (!string.IsNullOrEmpty(name))
+    {
+        ICities cities = null;
+
+        using (ICityForecast fc = new CityForecast())
+        {
+            cities = await fc.CitiesAsync(name.WithoutAccents());
+        }
+        return Json(cities, JsonRequestBehavior.DenyGet);
+    }    
+    return Json(new string[] { }, JsonRequestBehavior.DenyGet);
+}
+[HttpPost]
+[Route("prevision")]
+public async Task<JsonResult> ForecastPrevision(int? Id, int? Count = 4)
+{    
+    IPrevision prev = null;
+    if (Id.HasValue)
+    {                    
+        using (ICityForecast fc = new CityForecast())
+        {
+            prev = await fc.ForecastAsync(Id.Value, ((Count.HasValue && Count == 7) ? ForecastDay.D7 : ForecastDay.D4));
+        }
+        return Json(prev, JsonRequestBehavior.DenyGet);
+    }
+    return Json(new string[] { }, JsonRequestBehavior.DenyGet);
+}
+
+```
+
 ###Modelo de Resposta da classe Prevision e Days
 
 ___Prevision___
