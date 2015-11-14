@@ -98,13 +98,13 @@ use a `class` logo abaixo como método de extensão para remover os acentos:
 ```Csharp
 public static class Methods
 {
-    public static string WithoutAccents(this string texto)
+    public static string WithoutAccents(this string str)
     {
-        if (string.IsNullOrEmpty(texto))
+        if (string.IsNullOrEmpty(str))
         {
             return string.Empty;
         }
-        byte[] bytes = System.Text.Encoding.GetEncoding("iso-8859-8").GetBytes(texto);
+        byte[] bytes = System.Text.Encoding.GetEncoding("iso-8859-8").GetBytes(str);
         return System.Text.Encoding.UTF8.GetString(bytes);
     }
 }
