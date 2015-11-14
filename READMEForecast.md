@@ -81,7 +81,10 @@ public async Task<JsonResult> ForecastPrevision(int? Id, int? Count = 4)
     {                    
         using (ICityForecast fc = new CityForecast())
         {
-            prev = await fc.ForecastAsync(Id.Value, ((Count.HasValue && Count == 7) ? ForecastDay.D7 : ForecastDay.D4));
+            prev = await fc.ForecastAsync(Id.Value, 
+                ((Count.HasValue && Count == 7) ? 
+                    ForecastDay.D7 : 
+                    ForecastDay.D4));
         }
         return Json(prev, JsonRequestBehavior.DenyGet);
     }
