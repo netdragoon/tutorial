@@ -92,7 +92,7 @@ public async Task<JsonResult> ForecastPrevision(int? Id, int? Count = 4)
 }
 
 ```
-Observação: Quando for resgatar as cidades o texto informado não pode ser acentuado, então
+___Observação:___ Quando for resgatar as cidades o texto informado não pode ser acentuado, então
 use a `class` logo abaixo como método de extensão para remover os acentos:
 
 ```Csharp
