@@ -118,7 +118,7 @@ Classe que tem as informações das cidades seguindo o modelo de cidade.
 
 ```Csharp
 
-public class Cities : Interfaces.ICities
+public class Cities : ICities
 {
     public Cities()
     {
@@ -137,8 +137,10 @@ public class Cities : Interfaces.ICities
 
 ___City___
 
+Modelo de cidade.
+
 ```Csharp
-public class City : Interfaces.ICity
+public class City : ICity
 {    
     public int Id { get; set; } 
     public string Name { get; set; }
