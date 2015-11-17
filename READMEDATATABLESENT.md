@@ -4,6 +4,9 @@
 
 [![Canducci DataTables Entity Framework - NET 4.5](http://i666.photobucket.com/albums/vv25/netdragoon/1445749817_f-table-cell_128_zpschpxbzxv.png)](https://www.nuget.org/packages/Canducci.DataTables.EntityFramework/)
 
+[![NuGet](https://img.shields.io/nuget/dt/Canducci.DataTables.EntityFramework.svg?style=plastic)](https://www.nuget.org/packages/Canducci.DataTables.EntityFramework/)
+[![NuGet](https://img.shields.io/nuget/v/Canducci.DataTables.EntityFramework.svg?style=plastic)](https://www.nuget.org/packages/Canducci.DataTables.EntityFramework/)
+
 ##Instalação do Pacote (NUGET)
 
 ```Csharp
