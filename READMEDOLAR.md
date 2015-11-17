@@ -9,8 +9,8 @@ __Web Service Yahoo__
 
 [![Canducci Dolar](http://i666.photobucket.com/albums/vv25/netdragoon/1430207215_money-increase-64_zps3sjc4h5j.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
 
-[![NuGet](https://img.shields.io/nuget/dt/CanducciQuoteDolar.svg?style=plastic)](https://www.nuget.org/packages/CanducciQuoteDolar/)
-[![NuGet](https://img.shields.io/nuget/v/CanducciQuoteDolar.svg?style=plastic)](https://www.nuget.org/packages/CanducciQuoteDolar/)
+[![NuGet](https://img.shields.io/nuget/dt/CanducciQuoteDolar.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/CanducciQuoteDolar/)
+[![NuGet](https://img.shields.io/nuget/v/CanducciQuoteDolar.svg?style=plastic&label=version)](https://www.nuget.org/packages/CanducciQuoteDolar/)
 
 ##Instalação do Pacote (NUGET)
 

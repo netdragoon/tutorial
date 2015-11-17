@@ -4,8 +4,8 @@
 
 [![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1446163380_excel_zps5lhqezet.png)](https://www.nuget.org/packages/Canducci.Excel/)
 
-[![NuGet](https://img.shields.io/nuget/dt/Canducci.Excel.svg?style=plastic)](https://www.nuget.org/packages/Canducci.Excel/)
-[![NuGet](https://img.shields.io/nuget/v/Canducci.Excel.svg?style=plastic&label=dowloads)](https://www.nuget.org/packages/Canducci.Excel/)
+[![NuGet](https://img.shields.io/nuget/dt/Canducci.Excel.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/Canducci.Excel/)
+[![NuGet](https://img.shields.io/nuget/v/Canducci.Excel.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.Excel/)
 
 ###Classes
 

@@ -9,6 +9,9 @@ __Web Service [CPTEC/INPE](http://servicos.cptec.inpe.br/XML/)__
 
 [![Canducci Forecast](http://i666.photobucket.com/albums/vv25/netdragoon/1447477148_Weather_zpsczx6fzr6.png)](https://www.nuget.org/packages/Canducci.Forecast/)
 
+[![NuGet](https://img.shields.io/nuget/dt/Canducci.Forecast.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/Canducci.Forecast/)
+[![NuGet](https://img.shields.io/nuget/v/Canducci.Forecast.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.Forecast/)
+
 ##Instalação do Pacote (NUGET)
 
 ```Csharp
