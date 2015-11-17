@@ -9,6 +9,9 @@ __Web Service http://viacep.com.br/__
 
 [![Canducci CEP](http://i666.photobucket.com/albums/vv25/netdragoon/cep_zpsoqtae5hr.png)](https://www.nuget.org/packages/CanducciCep/)
 
+[![NuGet](https://img.shields.io/nuget/dt/CanducciCep.svg?style=plastic)](https://www.nuget.org/packages/CanducciCep/)
+[![NuGet](https://img.shields.io/nuget/v/CanducciCep.svg?style=plastic)](https://www.nuget.org/packages/CanducciCep/)
+
 ##Instalação do Pacote (NUGET)
 
 ```Csharp
