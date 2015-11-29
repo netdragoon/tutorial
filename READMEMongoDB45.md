@@ -9,15 +9,17 @@
 
 ##Instalação do Pacote (NUGET)
 
+To install Canducci MongoDB Repository .NET 4.5 e 4.5.1, run the following command in the [Package Manager Console](http://docs.nuget.org/consume/package-manager-console)
+
 ```Csharp
 
 PM> Install-Package Canducci.MongoDB.Repository4.5
 
 ```
 
-##Como utilizar?
+##How to use?
 
-Crie em seu Web.config em `appSettings` duas configurações (MongoConnectionString e MongoDatabase):
+Create in your web.config in ` appSettings` two configurations ( MongoConnectionString and MongoDatabase ) :
 
 ```Csharp
 
@@ -27,9 +29,9 @@ Crie em seu Web.config em `appSettings` duas configurações (MongoConnectionStr
 
 ```
 
-essas configurações são responsável a conexão da camada ___Repository___.
+these settings are responsible for the connection layer ___Repository___.
 
-___Faça uma classe que representa a sua Collection no MongoDB___
+___Make a class that represents your Collection in MongoDB___
 
 ```Csharp
 
@@ -74,11 +76,11 @@ namespace Br.Mongo.Web4._5.Models
 }
 
 ```
-___Observação:___ tem um atributo `MongoCollectionName` que possui a configuração do nome da sua coleção no mongo, se por acaso não passar ele pega o nome da classe.
+___Obs:___ It has a ` MongoCollectionName` attribute that has the configuration of the name of your collection in mongo , if by chance not pass he takes the class name.
 
-___Próximo passo será a criação do `Repository`.___
+___Next step will be the creation of `Repository`.___
 
-Crie um `class` e declare esses dois `namespace`
+Create a ` class` and declare these two ` namespace`
 
 ```Csharp
 using Canducci.MongoDB.Repository.Contracts;
@@ -86,7 +88,7 @@ using Canducci.MongoDB.Repository.Connection;
 
 ```
 
-___Em sua codificação:___
+___Codification:___
 
 ```Csharp
 
@@ -107,9 +109,9 @@ public sealed class RepositoryEstudos : RepositoryEstudosContract
 
 ```
 
-__Solução básica com Unity__
+__Basic solution Unity__
 
-___Configurando Unity___
+___Setting Unity___
 
 ```Csharp
 
@@ -146,7 +148,7 @@ namespace Br.Mongo.Web4._5.App_Start
 
             // Configurações do UnityContainer
 
-            container.RegisterType<IConnect, Connect>();
+            container.RegisterType<IConnect, Connect>(new InjectionConstructor());
 
             container.RegisterType<RepositoryEstudosContract, RepositoryEstudos>();
         }
@@ -155,21 +157,15 @@ namespace Br.Mongo.Web4._5.App_Start
 
 ```
 
-__Utilizando no `Controller`__
+__`Controller`__
 
 ```Csharp
 
 using Br.Mongo.Web4._5.Models;
-using Canducci.MongoDB.Repository.Connection;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-
 namespace Br.Mongo.Web4._5.Controllers
 {
     public class ProvaController : Controller
@@ -181,18 +177,25 @@ namespace Br.Mongo.Web4._5.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (this.Repository != null) this.Repository.Dispose();
+
+            if (Repository != null) Repository.Dispose();
             base.Dispose(disposing);
+
         }
         public async Task<ActionResult> Index(int? Page, string Pesquisa)
-        {
-            var Sort = Builders<Estudos>.Sort.Ascending(x => x.Description);
-            if (string.IsNullOrEmpty(Pesquisa)) {
-                return View(await Repository.Pagination(Page ?? 1, 10, Sort));
+        {           
+
+            if (string.IsNullOrWhiteSpace(Pesquisa))
+            {                
+                return View(
+                    await Repository
+                    .PaginationAsync(Page ?? 1, 10, x => x.Description));
             }
-            return View(await Repository.Pagination(Page ?? 1,10, Builders<Estudos>
-                .Filter
-                .Regex(x => x.Description, BsonRegularExpression.Create(string.Format("/{0}/i", Pesquisa))), Sort));
+            return View(
+                await Repository
+                    .PaginationAsync(Page ?? 1, 10, x => x.Description, 
+                        x => x.Description.Contains(Pesquisa)));
+
         }
         
         public ActionResult Create()
@@ -205,8 +208,8 @@ namespace Br.Mongo.Web4._5.Controllers
         public async Task<ActionResult> Create(Estudos estudo)
         {
             try
-            {
-                await Repository.Add(estudo);
+            {                
+                await Repository.AddAsync(estudo);
                 return RedirectToAction("Index");
             }
             catch
@@ -217,9 +220,9 @@ namespace Br.Mongo.Web4._5.Controllers
 
         // GET: Prova/Edit/5
         public async Task<ActionResult> Edit(string id)
-        {
+        {            
             ObjectId Id = Repository.CreateObjectId(id);
-            return View(await Repository.Find(x => x.Id.Equals(Id)));
+            return View(await Repository.FindAsync(Id));            
         }
 
         // POST: Prova/Edit/5
@@ -227,9 +230,10 @@ namespace Br.Mongo.Web4._5.Controllers
         public async Task<ActionResult> Edit(string id, Estudos estudo)
         {
             try
-            {                
-                estudo.Id = Repository.CreateObjectId(id);
-                ReplaceOneResult edit = await Repository.Edit(Builders<Estudos>.Filter.Eq<ObjectId>(x => x.Id, estudo.Id), estudo);
+            {                   
+                estudo.Id = Repository.CreateObjectId(id);                                
+                ReplaceOneResult edit = 
+                    await Repository.EditAsync(a => a.Id.Equals(estudo.Id), estudo);
                 return RedirectToAction("Index");
             }
             catch
@@ -244,7 +248,8 @@ namespace Br.Mongo.Web4._5.Controllers
             try
             {
                 ObjectId Id = Repository.CreateObjectId(id);
-                DeleteResult delete = await Repository.Delete(x => x.Id.Equals(Id));                
+                DeleteResult delete = 
+                    await Repository.DeleteAsync(x => x.Id.Equals(Id));
                 return RedirectToAction("Index");
             }
             catch
@@ -257,44 +262,112 @@ namespace Br.Mongo.Web4._5.Controllers
 
 ```
 
-Aqui estão todos os métodos desse `Repository`
+Interface `IRepository` and his methods:
 
 
 ```Csharp
 
+using Canducci.MongoDB.Repository.Connection;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using PagedList;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
 namespace Canducci.MongoDB.Repository.Contracts
 {    
     public interface IRepository<T>: IDisposable
-        where T : class, new()
-    {       
-        IMongoCollection<T> Collection { get; }
-        string CollectionName { get; }
-        Task<T> Add(T Model);
-        Task<ReplaceOneResult> Edit(Expression<Func<T, bool>> Query, T Model);
-        Task<ReplaceOneResult> Edit(FilterDefinition<T> Query, T Model);
-        Task<IEnumerable<T>> Add(IEnumerable<T> Models);
-        Task<UpdateResult> Update(Expression<Func<T, bool>> Query, UpdateDefinition<T> Update);
-        Task<UpdateResult> Update(FilterDefinition<T> Query, UpdateDefinition<T> Update);
-        Task<T> Find(FilterDefinition<T> Query);
-        Task<T> Find(Expression<Func<T, bool>> Query);
-        Task<IEnumerable<T>> All(Expression<Func<T, bool>> Query, SortDefinition<T> SortBy = null);
-        Task<IEnumerable<T>> All(FilterDefinition<T> Query, SortDefinition<T> SortBy = null);
-        Task<IEnumerable<T>> All(SortDefinition<T> SortBy);
-        Task<IEnumerable<T>> All();
-        Task<DeleteResult> Delete(Expression<Func<T, bool>> Query);
-        Task<DeleteResult> Delete(FilterDefinition<T> Query);
+        where T : class
+    {
+        #region Methods
+        IMongoCollection<T> MongoCollection();
+        IConnect MongoConnect();
+        #endregion Methods
+
+        #region CRUD
+        Task<T> AddAsync(T Model);
+        Task<T> AddAsync(T Model, System.Threading.CancellationToken CancellationToken);
+        Task<IEnumerable<T>> AddAsync(IEnumerable<T> Models);
+        Task<IEnumerable<T>> AddAsync(IEnumerable<T> Models, InsertManyOptions Options);
+        Task<IEnumerable<T>> AddAsync(IEnumerable<T> Models, InsertManyOptions Options, System.Threading.CancellationToken CancellationToken);
+
+        Task<ReplaceOneResult> EditAsync(Expression<Func<T, bool>> Where, T Model);
+        Task<ReplaceOneResult> EditAsync(FilterDefinition<T> Query, T Model);
+        Task<ReplaceOneResult> EditAsync(Expression<Func<T, bool>> Where, T Model, UpdateOptions Options);
+        Task<ReplaceOneResult> EditAsync(Expression<Func<T, bool>> Where, T Model, UpdateOptions Options, System.Threading.CancellationToken CancellationToken);
+
+        Task<UpdateResult> UpdateAsync(Expression<Func<T, bool>> Where, UpdateDefinition<T> Update);
+        Task<UpdateResult> UpdateAsync(Expression<Func<T, bool>> Where, UpdateDefinition<T> Update, UpdateOptions Options);
+        Task<UpdateResult> UpdateAsync(Expression<Func<T, bool>> Where, UpdateDefinition<T> Update, UpdateOptions Options, System.Threading.CancellationToken CancellationToken);
+        Task<UpdateResult> UpdateAsync(FilterDefinition<T> Query, UpdateDefinition<T> Update);
+
+        Task<DeleteResult> DeleteAsync(Expression<Func<T, bool>> Where);
+        Task<DeleteResult> DeleteAsync(Expression<Func<T, bool>> Query, System.Threading.CancellationToken CancellationToken);
+        Task<DeleteResult> DeleteAsync(FilterDefinition<T> Query);
+        Task<DeleteResult> DeleteAsync(FilterDefinition<T> Query, System.Threading.CancellationToken CancellationToken);
+
+        #endregion CRUD
+
+        #region Find
+        Task<T> FindAsync(ObjectId Id);
+        Task<T> FindAsync<TKey>(TKey Id, string Name = "_id");
+        Task<T> FindAsync(FilterDefinition<T> Query);
+        Task<T> FindAsync(Expression<Func<T, bool>> Query);
+        Task<IAsyncCursor<T>> FindAsync(FilterDefinition<T> Query, FindOptions<T, T> Options = null, System.Threading.CancellationToken CancellationToken = default(System.Threading.CancellationToken));
+        Task<IAsyncCursor<T>> FindAsync(Expression<Func<T, bool>> Query, FindOptions<T, T> Options = null, System.Threading.CancellationToken CancellationToken = default(System.Threading.CancellationToken));
+
+        T Find(Expression<Func<T, bool>> Where);
+
+        #endregion Find
+
+        #region All
+        Task<IEnumerable<T>> AllAsync();        
+        Task<IEnumerable<T>> AllAsync(SortDefinition<T> SortBy);        
+        Task<IEnumerable<T>> AllAsync(FilterDefinition<T> Query, SortDefinition<T> SortBy = null);
+        Task<IEnumerable<T>> AllAsync(Expression<Func<T, bool>> Query, SortDefinition<T> SortBy = null);
+        Task<IEnumerable<T>> AllAsync<TKey>(Expression<Func<T, bool>> Query, Expression<Func<T, TKey>> OrderBy);
+        Task<IEnumerable<T>> AllAsync<TKey>(int Page, int Total, Expression<Func<T, bool>> Query, Expression<Func<T, TKey>> OrderBy);
+
+        IList<T> All();
+        IList<T> All<Tkey>(Expression<Func<T, Tkey>> OrderBy);
+        IList<T> All<TKey>(Expression<Func<T, TKey>> OrderBy, Expression<Func<T, bool>> Where);
+        IList<T> All<TKey>(int Page, int Total, Expression<Func<T, TKey>> OrderBy, Expression<Func<T, bool>> Where);
+
+        #endregion All
+
+        #region Count
+        Task<long> CountAsync();
+        Task<long> CountAsync(FilterDefinition<T> Query, CountOptions Options = null, System.Threading.CancellationToken CancellationToken = default(System.Threading.CancellationToken));
+        Task<long> CountAsync(Expression<Func<T, bool>> Query, CountOptions Options = null, System.Threading.CancellationToken CancellationToken = default(System.Threading.CancellationToken));
+
+        long Count();
+        long Count(Expression<Func<T, bool>> Query);
+
+        #endregion Count
+
+        #region Create
         T Create();
         ObjectId CreateObjectId(string Value);
-        Task<PagedList.StaticPagedList<T>> Pagination(int Page, int Total, SortDefinition<T> SortBy, Expression<Func<T, bool>> Query = null);
-        Task<PagedList.StaticPagedList<T>> Pagination(int Page, int Total, FilterDefinition<T> Query, SortDefinition<T> SortBy);
+
+        #endregion Create
+
+        #region StaticPagedList
+        Task<StaticPagedList<T>> PaginationAsync<TKey>(int Page, int Total, Expression<Func<T, TKey>> OrderBy, Expression<Func<T, bool>> Where = null);
+        Task<StaticPagedList<T>> PaginationAsync(int Page, int Total, SortDefinition<T> SortBy, Expression<Func<T, bool>> Where = null);
+        Task<StaticPagedList<T>> PaginationAsync(int Page, int Total, SortDefinition<T> SortBy, FilterDefinition<T> Query);
+
+        StaticPagedList<T> Pagination<TKey>(int Page, int Total, Expression<Func<T, TKey>> OrderBy, Expression<Func<T, bool>> Where = null);
+
+        #endregion StaticPagedList
+
+        #region AsQueryable
+        IMongoQueryable<T> Query();
+        IMongoQueryable<T> Query(params Expression<Func<T, bool>>[] Where);
+        IMongoQueryable<T> Query<TKey>(Expression<Func<T, TKey>> OrderBy, params Expression<Func<T, bool>>[] Where);        
+        #endregion AsQueryable
+
     }
 }
 
