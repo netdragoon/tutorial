@@ -7,6 +7,8 @@
 [![NuGet](https://img.shields.io/nuget/dt/Canducci.MongoDB.Repository4.5.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/Canducci.MongoDB.Repository4.5/)
 [![NuGet](https://img.shields.io/nuget/v/Canducci.MongoDB.Repository4.5.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.MongoDB.Repository4.5/)
 
+[Version Old 1.0.0](https://github.com/netdragoon/tutorial/blob/master/READMEMongoDB45old.md) 
+
 ##Instalação do Pacote (NUGET)
 
 To install Canducci MongoDB Repository .NET 4.5 e 4.5.1, run the following command in the [Package Manager Console](http://docs.nuget.org/consume/package-manager-console)
