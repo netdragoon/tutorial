@@ -18,7 +18,7 @@ Declare o namespace:
 
 ```Csharp
 using Canducci.YoutubeThumbnail;
-```Csharp
+```
 
 Create a folder in your MVC Web Application, for example `Images/`, to serve as image cache, have adequate performance on single request for a particular address.
 
