@@ -9,7 +9,7 @@
 
 ___[Version Old 1.0.0](https://github.com/netdragoon/tutorial/blob/master/READMEMongoDB45old.md)___
 
-##Instalação do Pacote (NUGET)
+##Install Package (NUGET)
 
 To install Canducci MongoDB Repository .NET 4.5 e 4.5.1, run the following command in the [Package Manager Console](http://docs.nuget.org/consume/package-manager-console)
 
