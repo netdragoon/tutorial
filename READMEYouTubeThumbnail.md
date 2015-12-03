@@ -48,12 +48,7 @@ namespace WebCanducci45.Controllers
                 if (Thumbnail.UrlTryParse(Url, out _url))
                 {
                     thumb = new Thumbnail(_url);                    
-                    await thumb.SaveAllAsync("Imagens/", Server.MapPath("~"));
-                    ViewBag.Exits = false;
-                    if (await thumb.ThumbnailPicture0.ExistsAsync())
-                    {
-                        ViewBag.Exits = true;
-                    }
+                    await thumb.SaveAllAsync("Imagens/", Server.MapPath("~"));                    
                     ViewBag.Url = Url;
                     return View(thumb);
                 }
@@ -92,8 +87,7 @@ namespace WebCanducci45.Controllers
             </div>
         }
         @if (Model != null)
-        {
-            <p>@ViewBag.Exits</p>
+        {            
             <div class="row">
                 <div class="col-md-6">
                     <h4>Foto 0</h4>
@@ -130,5 +124,82 @@ namespace WebCanducci45.Controllers
     </div>
 </body>
 </html>
+
+```
+___
+
+If you prefer to use only some of the images can make the separate process as shown below:
+
+```Csharp
+using Canducci.YoutubeThumbnail;
+using System;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+namespace WebCanducci45.Controllers
+{
+    public class YouTubeController : Controller
+    {
+        [HttpGet]        
+        public async Task<ActionResult> Index1()
+        {
+            string Url = "https://www.youtube.com/watch?v=ZjdliWRPHxQ";
+            Thumbnail thumb = null;
+            ThumbnailPicture thumbPicture = null;
+            Uri _url;
+            try
+            {
+                if (Thumbnail.UrlTryParse(Url, out _url))
+                {
+                    thumb = new Thumbnail(_url);
+                    thumbPicture = thumb.ThumbnailPicture0;
+                    thumbPicture.Path = "Imagens/";
+                    thumbPicture.ServerPath = Server.MapPath("~");
+                    if (thumbPicture.Exists() == false)
+                    {
+                        await thumbPicture.SaveAsync();
+                    }
+                }
+                return View(thumb);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+}
 ```
 
+####View
+```HTML
+@model Canducci.YoutubeThumbnail.Thumbnail
+@{ Layout = null; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index1</title>
+</head>
+<body>
+    <div class="container">        
+        @if (Model != null)
+        {   
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Foto 0</h4>
+                    <p><img src="@Model.ThumbnailPicture0.PathWeb" style="border:0" /> </p>
+                </div>
+            </div>            
+            <div>
+                <h2>Video Compartilhar</h2>
+                <p>@Model.VideoShare</p>
+            </div>
+            <div>
+                <h2>Video Embed</h2>
+                <p>@Html.Raw(Model.VideoEmbed())</p>
+            </div>
+        }
+    </div>
+</body>
+</html>
+```
