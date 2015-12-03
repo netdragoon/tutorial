@@ -128,7 +128,11 @@ namespace WebCanducci45.Controllers
 ```
 ___
 
-If you prefer to use only some of the images can make the separate process as shown below:
+
+If you prefer to use only some of the images ( in the case are 5 pictures ) can make the separate process as shown below:
+
+
+___Selecting image 0 (`ThumbnailPicture0`):___
 
 ```Csharp
 using Canducci.YoutubeThumbnail;
@@ -139,10 +143,9 @@ namespace WebCanducci45.Controllers
 {
     public class YouTubeController : Controller
     {
-        [HttpGet]        
-        public async Task<ActionResult> Index1()
-        {
-            string Url = "https://www.youtube.com/watch?v=ZjdliWRPHxQ";
+        [HttpPost]        
+        public async Task<ActionResult> Index1(string Url)
+        {            
             Thumbnail thumb = null;
             ThumbnailPicture thumbPicture = null;
             Uri _url;
@@ -202,4 +205,82 @@ namespace WebCanducci45.Controllers
     </div>
 </body>
 </html>
+```
+
+The contained methods are:
+
+___Thumbnail___
+```Csharp
+public interface IThumbnail
+{
+	ThumbnailPicture ThumbnailPicture0 { get; }
+	ThumbnailPicture ThumbnailPicture1 { get; }
+	ThumbnailPicture ThumbnailPicture2 { get; }
+	ThumbnailPicture ThumbnailPicture3 { get; }
+	ThumbnailPicture ThumbnailPictureDefault { get; }
+	
+	IEnumerable<ThumbnailPicture> ThumbnailPictures { get; }
+	
+	string VideoShare { get; }
+
+	bool DeleteAll(string Path, string ServePath = null);	
+	bool SaveAll(string Path, string ServePath = null);
+
+	Task<bool> DeleteAllAsync(string Path, string ServePath = null);
+	Task<bool> SaveAllAsync(string Path, string ServePath = null);
+	
+	Thumbnail SetUrl(Uri Url);
+	Thumbnail SetUrl(string Url);
+	
+	ThumbnailPicture ThumbnailPicture(ThumbnailUrlType UrlType);
+
+	string VideoEmbed(int Width = 560, int Height = 315, 
+			int Frameborder = 0, bool SuggestVideo = true, 
+			bool Controls = true, bool ShowInfo = true);
+}
+
+```
+
+___ThumbnailPicture___
+
+```Csharp
+public interface IThumbnailPicture
+{
+    
+    string Code { get; }
+    
+    ThumbnailUrlType Id { get; }
+    
+    byte[] ImageThumbnail { get; }
+    
+    string Path { get; set; }
+    
+    string PathDir { get; }
+    
+    string PathWeb { get; }
+    
+    string ServerPath { get; set; }
+    
+    Uri Url { get; }
+
+    Uri UrlThumbnail { get; }
+
+    bool Delete();
+    bool DeleteAs(string Path, string ServerPath);
+    Task<bool> DeleteAsAsync(string Path, string ServerPath);
+    Task<bool> DeleteAsync();
+
+    bool Exists();
+    bool Exists(string Path, string ServerPath);
+    Task<bool> ExistsAsync();
+    Task<bool> ExistsAsync(string Path, string ServerPath);
+
+    bool Save();
+    bool SaveAs(string Path, string ServerPath);    
+    Task<bool> SaveAsAsync(string Path, string ServerPath);
+    Task<bool> SaveAsync();
+
+    void Dispose();
+}
+
 ```
