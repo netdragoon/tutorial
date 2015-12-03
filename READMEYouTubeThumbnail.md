@@ -126,6 +126,9 @@ namespace WebCanducci45.Controllers
 </html>
 
 ```
+
+___Obs:___ The `VideoShare` method brings the link to share the video and the `ViewEmbed()` would be the player with the video.
+
 ___
 
 
@@ -207,7 +210,9 @@ namespace WebCanducci45.Controllers
 </html>
 ```
 
-The contained methods are:
+In the process itself is optimized and only bring what you want , in which case it would be the image of 0 youtube site posted video.
+
+####The contained methods are:
 
 ___Thumbnail___
 ```Csharp
