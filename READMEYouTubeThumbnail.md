@@ -2,6 +2,9 @@
 
 [![Canducci YoutubeThumbnail](http://i1194.photobucket.com/albums/aa377/netdragoon1/1449170629_Neon_Line_Social_Circles_50Icon_10px_grid-45_zpsjazbo2dc.png)](https://github.com/netdragoon/tutorial/blob/master/READMEYouTubeThumbnail.md)
 
+[![NuGet](https://img.shields.io/nuget/dt/CanducciYoutubeThumbnail.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/CanducciYoutubeThumbnail/)
+[![NuGet](https://img.shields.io/nuget/v/CanducciYoutubeThumbnail.svg?style=plastic&label=version)](https://www.nuget.org/packages/CanducciYoutubeThumbnail/)
+
 ##Install Package (NUGET)
 
 To install Canducci YoutubeThumbnail, run the following command in the [Package Manager Console](http://docs.nuget.org/consume/package-manager-console)
