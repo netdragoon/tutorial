@@ -64,7 +64,8 @@ public class Thumbnail
     Thumbnail SetUrl(Uri Url);
     Thumbnail SetUrl(string Url);
     ThumbnailPicture ThumbnailPicture(ThumbnailUrlType UrlType);
-    string VideoEmbed(int Width = 560, int Height = 315, int Frameborder = 0, bool SuggestVideo = true, bool Controls = true, bool ShowInfo = true);
+    string VideoEmbed(int Width = 560, int Height = 315, int Frameborder = 0, 
+        bool SuggestVideo = true, bool Controls = true, bool ShowInfo = true);
 }
 ```
 
