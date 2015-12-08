@@ -92,6 +92,46 @@ public class ThumbnailPicture
 }
 
 ```
+
+###Example MVC ASP.NET
+```
+public class YouTubeController : Controller
+{
+    [HttpGet]
+    public ActionResult Index()
+    {
+        return View();
+    }
+    [HttpPost]
+    public async Task<ActionResult> Index(string Url)
+    {            
+        Thumbnail thumb = null;
+        Uri _url;
+        try
+        {
+            if (Thumbnail.UrlTryParse(Url, out _url))
+            {
+
+                thumb = new Thumbnail(_url);
+
+                IList<ThumbnailResult> results =
+                    await thumb.SaveAllAsync("Imagens/", Server.MapPath("~"));
+               
+                ViewBag.Url = Url;
+
+                return View(thumb);
+            }
+            return View();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }           
+    }
+}
+```
+___
+
 ###Version 0.0.1
 Create a folder in your MVC Web Application, for example `Images/`, to serve as image cache, have adequate performance on single request for a particular address.
 
