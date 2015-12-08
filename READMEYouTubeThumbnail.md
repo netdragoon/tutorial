@@ -24,20 +24,74 @@ using Canducci.YoutubeThumbnail;
 ```
 ###Version 0.0.2
 
-- Adição das imagens Standard, Medium, High e MaxResolution.
-- Removendo um erro na expressão regular que não aceitava caracteres válido `-` e `_`.
-- Verificação de imagem existente no servidor retornando na classe adicionado `ThumbnailResult` o resultados sucesso (podendo ser status verdadeiro ou falso, dependendo do método) e erros encontrados.
+- Add Thumbnail Image Type Standard, Medium, High e MaxResolution;
+- Removed error in regular expression to accept characters - and _ video code
+- Try catch verification nonexistent images on the server.
+- ThumbnailResult class addition to checking for errors and messages (SalveAll and DeleteAll).
 
-####Codificação melhorada em seguintes partes do código:
-
-Consigo resgatar o que aconteceu na hora de salvar todas as imagens, verificando se algum delas aconteceu algum erro.
+####Example Code
 
 ```Csharp
-IList<ThumbnailResult> results = await thumb.SaveAllAsync("Imagens/", Server.MapPath("~"));
+Thumbnail thumb = new Thumbnail("address_youtube");
+
+//Save
+ThumbnailResult result0 = thumb.ThumbnailPicture0.SaveAs("Imagens/", Server.MapPath("~"));
+IList<ThumbnailResult> results = thumb.SaveAll("Imagens/", Server.MapPath("~"));
+
+//Delete
+ThumbnailResult result0 = thumb.ThumbnailPicture0.DeleteAs("Imagens/", Server.MapPath("~"));
+IList<ThumbnailResult> results = thumb.DeleteAll("Imagens/", Server.MapPath("~"));
+```
+
+___Classe Thumbnail___
+
+```Csharp
+public class Thumbnail
+{
+    ThumbnailPicture ThumbnailPicture0 { get; }
+    ThumbnailPicture ThumbnailPicture1 { get; }
+    ThumbnailPicture ThumbnailPicture2 { get; }
+    ThumbnailPicture ThumbnailPicture3 { get; }
+    ThumbnailPicture ThumbnailPictureDefault { get; }
+    ThumbnailPicture ThumbnailPictureHightQuality { get; }
+    ThumbnailPicture ThumbnailPictureMaxResolution { get; }
+    ThumbnailPicture ThumbnailPictureMediumQuality { get; }
+    IEnumerable<ThumbnailPicture> ThumbnailPictures { get; }
+    ThumbnailPicture ThumbnailPictureStandard { get; }
+    string VideoShare { get; }
+    IList<ThumbnailResult> DeleteAll(string Path, string ServePath = null);
+    IList<ThumbnailResult> SaveAll(string Path, string ServePath = null);
+    Thumbnail SetUrl(Uri Url);
+    Thumbnail SetUrl(string Url);
+    ThumbnailPicture ThumbnailPicture(ThumbnailUrlType UrlType);
+    string VideoEmbed(int Width = 560, int Height = 315, int Frameborder = 0, bool SuggestVideo = true, bool Controls = true, bool ShowInfo = true);
+}
+```
+
+___Classe ThumbnailPicture___
+
+```Csharp
+public class ThumbnailPicture
+{
+    string Code { get; }
+    ThumbnailUrlType Id { get; }
+    byte[] ImageThumbnail { get; }
+    string Path { get; set; }
+    string PathDir { get; }
+    string PathWeb { get; }
+    string ServerPath { get; set; }
+    Uri Url { get; }
+    Uri UrlThumbnail { get; }
+    ThumbnailResult Delete();
+    ThumbnailResult DeleteAs(string Path, string ServerPath);
+    void Dispose();
+    bool Exists();
+    bool Exists(string Path, string ServerPath);
+    ThumbnailResult Save();
+    ThumbnailResult SaveAs(string Path, string ServerPath);
+}
 
 ```
-Esse código se reflete também no `SaveAll`, `SavelAllAsync`, `DeleteAll` e `DeleteAllAsync` da classe `Thumbnail` e `Save`, `SaveAsync`, `Delete`, `DeleteAsync` da classe `ThumbnailPicture`, aonde todos esses métodos retornan  classe `ThumbnailResult` para verificação do que aconteceu.
-
 ###Version 0.0.1
 Create a folder in your MVC Web Application, for example `Images/`, to serve as image cache, have adequate performance on single request for a particular address.
 
@@ -235,7 +289,7 @@ In the process itself is optimized and only bring what you want , in which case 
 
 ___Thumbnail___
 ```Csharp
-public interface IThumbnail
+public class Thumbnail
 {
 	ThumbnailPicture ThumbnailPicture0 { get; }
 	ThumbnailPicture ThumbnailPicture1 { get; }
@@ -268,7 +322,7 @@ public interface IThumbnail
 ___ThumbnailPicture___
 
 ```Csharp
-public interface IThumbnailPicture
+public class ThumbnailPicture
 {
     
     string Code { get; }
