@@ -95,7 +95,10 @@ public class ThumbnailPicture
 ```
 
 ###Example MVC ASP.NET
-```
+
+___Code___
+
+```Csharp
 public class YouTubeController : Controller
 {
     [HttpGet]
@@ -130,6 +133,164 @@ public class YouTubeController : Controller
         }           
     }
 }
+```
+___View___
+
+```Csharp
+@model Canducci.YoutubeThumbnail.Thumbnail
+@{Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pagina do You Tube</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            <div class="">
+                <input type="url" name="Url" id="Url" class="form-control" value="@ViewBag.Url" required />
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        }
+        @if (Model != null)
+        {
+            <p>@ViewBag.Exits</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Foto 0</h4>
+                    <p>@Model.ThumbnailPicture0.UrlThumbnail</p>
+                    @if (Model.ThumbnailPicture0.Exists())
+                    {
+                        <p><img src="@Model.ThumbnailPicture0.PathWeb" style="border:0" /></p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }                  
+                </div>
+                <div class="col-md-6">
+                    <h4>Foto MaxResolution</h4>
+                    <p>@Model.ThumbnailPictureMaxResolution.UrlThumbnail</p>
+                    @if (Model.ThumbnailPictureMaxResolution.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPictureMaxResolution.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>Foto 1</h4>
+                    <p>@Model.ThumbnailPicture1.UrlThumbnail</p>
+                    @if (Model.ThumbnailPicture1.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPicture1.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>
+                <div class="col-md-3">
+                    <h4>Foto 2</h4>
+                    <p>@Model.ThumbnailPicture2.UrlThumbnail</p>
+                    @if (Model.ThumbnailPicture2.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPicture2.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>
+                <div class="col-md-3">
+                    <h4>Foto 3</h4>
+                    <p>@Model.ThumbnailPicture3.UrlThumbnail</p>
+                    @if (Model.ThumbnailPicture3.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPicture3.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>
+                <div  class="col-md-3">
+                    <h4>Foto Default</h4>
+                    <p>@Model.ThumbnailPictureDefault.UrlThumbnail</p>
+                    @if (Model.ThumbnailPictureDefault.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPictureDefault.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Foto HightQuality</h4>
+                    <p>@Model.ThumbnailPictureHightQuality.UrlThumbnail</p>
+                    @if (Model.ThumbnailPictureHightQuality.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPictureHightQuality.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Foto Medium Quality</h4>
+                    <p>@Model.ThumbnailPictureMediumQuality.UrlThumbnail</p>
+                    @if (Model.ThumbnailPictureMediumQuality.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPictureMediumQuality.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>
+                <div class="col-md-4">
+                    <h4>Foto Standard</h4>
+                    <p>@Model.ThumbnailPictureStandard.UrlThumbnail</p>
+                    @if (Model.ThumbnailPictureStandard.Exists())
+                    {
+                    <p><img src="@Model.ThumbnailPictureStandard.PathWeb" style="border:0" /> </p>
+                    }
+                    else
+                    {
+                        <p>Imagem inexistente no servidor</p>
+                    }
+                </div>               
+            </div>
+            <hr />
+            <div>
+                <h2>Video Compartilhar</h2>
+                <p>@Model.VideoShare</p>
+            </div>
+            <hr />
+            <div>
+                <h2>Video Embed</h2>
+                <p>@Html.Raw(Model.VideoEmbed(SuggestVideo:false, Controls:false, ShowInfo:false))</p>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
 ```
 ___
 
