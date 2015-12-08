@@ -22,7 +22,23 @@ Declare o namespace:
 ```Csharp
 using Canducci.YoutubeThumbnail;
 ```
+###Version 0.0.2
 
+- Adição das imagens Standard, Medium, High e MaxResolution.
+- Removendo um erro na expressão regular que não aceitava caracteres válido `-` e `_`.
+- Verificação de imagem existente no servidor retornando na classe adicionado `ThumbnailResult` o resultados sucesso (podendo ser status verdadeiro ou falso, dependendo do método) e erros encontrados.
+
+####Codificação melhorada em seguintes partes do código:
+
+Consigo resgatar o que aconteceu na hora de salvar todas as imagens, verificando se algum delas aconteceu algum erro.
+
+```Csharp
+IList<ThumbnailResult> results = await thumb.SaveAllAsync("Imagens/", Server.MapPath("~"));
+
+```
+Esse código se reflete também no `SaveAll`, `SavelAllAsync`, `DeleteAll` e `DeleteAllAsync` da classe `Thumbnail` e `Save`, `SaveAsync`, `Delete`, `DeleteAsync` da classe `ThumbnailPicture`, aonde todos esses métodos retornan  classe `ThumbnailResult` para verificação do que aconteceu.
+
+###Version 0.0.1
 Create a folder in your MVC Web Application, for example `Images/`, to serve as image cache, have adequate performance on single request for a particular address.
 
 ####Controller
