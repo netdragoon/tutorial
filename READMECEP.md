@@ -1,8 +1,5 @@
 #Canducci CEP 
 
-###(version: 3.0.0)
-
-
 __Web Service http://viacep.com.br/__
 
 ##[Demo](http://canduccipackages.apphb.com/#/)
@@ -121,5 +118,36 @@ namespace Canducci.Web4._5._1.Controllers
             return View();
 
         }
+
+```
+
+####Lista de Unidade Federativas do Brasil
+
+```csharp
+Dictionary<object, object> ufs = ZipCodeLoad.UfToList();
+
+```
+
+####Verificação de dados válidos para buscas de CEP e Endereços
+
+_CEP_
+
+```csharp    
+    ZipCode zipCode = null;
+    if (ZipCode.TryParse("01414000", out zipCode))
+    {
+
+    }
+
+```
+
+_Endereços_
+
+```csharp    
+    AddressCode addressCode = null;
+    if (AddressCode.TryParse(ZipCodeUf.SP, "SÃO PAULO", "AVENIDA ANA", out addressCode))
+    {
+
+    }
 
 ```
