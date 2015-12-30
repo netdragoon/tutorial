@@ -14,7 +14,8 @@ __Web Service http://viacep.com.br/__
 ####Informações Nuget
 
 [![NuGet Core Version](https://img.shields.io/nuget/v/Nuget.Core.svg?style=plastic&label=nuget core version)](https://www.nuget.org/)
-
+[![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Configuration.svg?style=plastic&label=nuget core configuration version)](https://www.nuget.org/)
+[![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Server.svg?style=plastic&label=nuget server version)](https://www.nuget.org/)
 
 ##Instalação do Pacote (NUGET)
 
