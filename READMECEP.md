@@ -116,7 +116,7 @@ namespace Canducci.Web4._5._1.Controllers
         {
 
             ZipCodeInfo _info = load.Find("01414000");
-            ZipCodeInfo[] _infos = load.Address(ZipCodeUf.SP, "PRESIDENTE PRUDENTE", "AVE");
+            ZipCodeInfo[] _infos = load.Address(ZipCodeUf.SP, "SÃO PAULO", "AVE");
 
             return View();
 
