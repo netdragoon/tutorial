@@ -8,6 +8,8 @@ __Web Service http://viacep.com.br/__
 
 [![NuGet](https://img.shields.io/nuget/dt/CanducciCep.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/CanducciCep/)
 [![NuGet](https://img.shields.io/nuget/v/CanducciCep.svg?style=plastic&label=version)](https://www.nuget.org/packages/CanducciCep/)
+[![NuGet Core Version](https://img.shields.io/nuget/v/Nuget.Core.svg?style=plastic&label=nuget core version)](https://www.nuget.org/)
+
 
 ##Instalação do Pacote (NUGET)
 
