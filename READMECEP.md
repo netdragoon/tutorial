@@ -37,7 +37,7 @@ Declare o namespace `using Canducci.Zip;`
 try
 {
 	//Observação
-	//Formato válido para o CEP: 01414000 ou 01414-000
+	//Formato válido para o CEP: 01414000 ou 01414-000 ou 01.414-000
 
     ZipCodeLoad zipLoad = new ZipCodeLoad();
     
@@ -69,7 +69,7 @@ try
     ZipCodeLoad zipLoad = new ZipCodeLoad();
 
     AddressCode addressCode = null;
-    if (AddressCode.TryParse(ZipCodeUf.SP, "SÃO PAULO", "AVENIDA ANA", out addressCode))
+    if (AddressCode.TryParse(ZipCodeUf.SP, "SÃO PAULO", "AVE", out addressCode))
     {
         ZipCodeInfo[] zipCodeInfos = zipLoad.Address(addressCode);
     }
@@ -141,22 +141,41 @@ Dictionary<object, object> ufs = ZipCodeLoad.UfToList();
 
 _CEP_
 
-```csharp    
-    ZipCode zipCode = null;
-    if (ZipCode.TryParse("01414000", out zipCode))
-    {
-
-    }
+- Parse
+```csharp
+ZipCodeLoad zipLoad = new ZipCodeLoad();
+ZipCode zipCode = ZipCode.Parse("01.414-000");
+ZipCodeInfo _info = zipLoad.Find(zipCode);
 
 ```
 
+- TryParse
+```csharp    
+ZipCode zipCode = null;
+if (ZipCode.TryParse("01414000", out zipCode))
+{
+
+}
+
+```
+___
+
 _Endereços_
 
-```csharp    
-    AddressCode addressCode = null;
-    if (AddressCode.TryParse(ZipCodeUf.SP, "SÃO PAULO", "AVENIDA ANA", out addressCode))
-    {
+- Parse
+```csharp
+ZipCodeLoad zipLoad = new ZipCodeLoad();
+AddressCode addressCode = AddressCode.Parse(ZipCodeUf.SP, "SÃO PAULO", "AVE");
+ZipCodeInfo[] _infos = zipLoad.Address(addressCode);
 
-    }
+```
+
+- TryParse
+```csharp    
+AddressCode addressCode = null;
+if (AddressCode.TryParse(ZipCodeUf.SP, "SÃO PAULO", "AVE", out addressCode))
+{
+
+}
 
 ```
