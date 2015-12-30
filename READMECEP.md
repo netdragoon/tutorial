@@ -10,7 +10,7 @@ __Web Service http://viacep.com.br/__
 
 [![Downloads](https://img.shields.io/nuget/dt/CanducciCep.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/CanducciCep/)
 [![Version](https://img.shields.io/nuget/v/CanducciCep.svg?style=plastic&label=version)](https://www.nuget.org/packages/CanducciCep/)
-![Twitter](https://img.shields.io/twitter/url/http/www.nuget.org/packages/CanducciCep.svg?style=social)
+[[https://img.shields.io/twitter/url/http/www.nuget.org/packages/CanducciCep.svg?style=social]]
 
 ####Informações Nuget
 
