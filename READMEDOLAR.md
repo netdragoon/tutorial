@@ -22,8 +22,86 @@ PM> Install-Package CanducciQuoteDolar
 
 ##Como utilizar?
 
-Declare o namespace `using Canducci.QuoteDolar;` 
+_Declare o namespace_ `using Canducci.QuoteDolar;`
 
+####Version 2.0.0
+
+1 - Simples
+```Csharp
+Dolar dolar = new Dolar();
+DolarInfo info = dolar.DolarInfo();
+RatesInfo rate = info.RatesInfo.GetRatesInfoUSDBRL();
+```
+
+2 - Async (Version NET = 4.0)
+```Csharp
+static void Main(string[] args)
+{
+    Dolar dolar = new Dolar();
+    dolar.DolarInfoAsyncCompleted += Dolar_DolarInfoAsyncCompleted;
+    dolar.DolarInfoAsync();            
+
+    Console.ReadKey();
+}
+
+private static void Dolar_DolarInfoAsyncCompleted(DolarInfo dolarInfo)
+{
+
+    Console.WriteLine(dolarInfo.Count);            
+    Console.WriteLine(dolarInfo.Created);
+    Console.WriteLine(dolarInfo.Lang);
+    
+
+    dolarInfo.RatesInfo.ToList().ForEach(x =>
+    {
+        Console.WriteLine("*********************************");
+        Console.WriteLine(x.Id);
+        Console.WriteLine(x.Ask);
+        Console.WriteLine(x.Bid);
+        Console.WriteLine(x.Date);
+        Console.WriteLine(x.Rate);
+        Console.WriteLine(x.Time);                
+    });
+    Console.WriteLine("*********************************");
+}
+```
+
+3 - Async (Version NET >= 4.5)
+
+__Example MVC ASP.NET__
+
+```Csharp
+public class ExampleController : Controller
+{
+    private readonly Dolar _dolar;
+
+    public HomeController()
+    {
+        _dolar = new Dolar();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (_dolar != null)
+        {
+            _dolar.Dispose();
+        }
+        base.Dispose(disposing);
+    }
+
+    public async Task<ActionResult> DolarInfoAsync()
+    {        
+
+        DolarInfo _info = await _dolar.DolarInfoAsync();
+        
+        RatesInfo _result = _info.RatesInfo.GetRatesInfoUSDBRL();
+
+        return View(_result);
+    }
+```
+---
+
+####Version 1.0.0
 
 ```Csharp
 
