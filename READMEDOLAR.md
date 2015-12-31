@@ -4,10 +4,17 @@ __Web Service Yahoo__
 
 ##[Demo](http://canduccipackages.apphb.com/#/)
 
-[![Canducci Dolar](http://i666.photobucket.com/albums/vv25/netdragoon/1430207215_money-increase-64_zps3sjc4h5j.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
+####Informações Canducci DOLAR
 
+[![Canducci Dolar](http://i666.photobucket.com/albums/vv25/netdragoon/1430207215_money-increase-64_zps3sjc4h5j.png)](https://www.nuget.org/packages/CanducciQuoteDolar/)
 [![NuGet](https://img.shields.io/nuget/dt/CanducciQuoteDolar.svg?style=plastic&label=downloads)](https://www.nuget.org/packages/CanducciQuoteDolar/)
 [![NuGet](https://img.shields.io/nuget/v/CanducciQuoteDolar.svg?style=plastic&label=version)](https://www.nuget.org/packages/CanducciQuoteDolar/)
+
+####Informações Nuget
+
+[![NuGet Core Version](https://img.shields.io/nuget/v/Nuget.Core.svg?style=plastic&label=nuget core version)](https://www.nuget.org/)
+[![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Configuration.svg?style=plastic&label=nuget core configuration version)](https://www.nuget.org/)
+[![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Server.svg?style=plastic&label=nuget server version)](https://www.nuget.org/)
 
 ##Instalação do Pacote (NUGET)
 
