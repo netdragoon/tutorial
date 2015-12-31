@@ -1,7 +1,4 @@
-#Canducci DOLAR (QuoteDolar) 
-
-###(version: 1.0.0)
-
+##Canducci DOLAR (QuoteDolar) 
 
 __Web Service Yahoo__
 
@@ -26,14 +23,16 @@ _Declare o namespace_ `using Canducci.QuoteDolar;`
 
 ####Version 2.0.0
 
-1 - Simples
+_1 - Simples_
 ```Csharp
 Dolar dolar = new Dolar();
 DolarInfo info = dolar.DolarInfo();
 RatesInfo rate = info.RatesInfo.GetRatesInfoUSDBRL();
+//rateInfoUSDBRL.Bid (Compra)
+//rateInfoUSDBRL.Ask (Venda)
 ```
 
-2 - Async (Version NET = 4.0)
+_2 - Async (Version NET = 4.0)_
 ```Csharp
 static void Main(string[] args)
 {
@@ -66,7 +65,7 @@ private static void Dolar_DolarInfoAsyncCompleted(DolarInfo dolarInfo)
 }
 ```
 
-3 - Async (Version NET >= 4.5)
+_3 - Async (Version NET >= 4.5)_
 
 __Example MVC ASP.NET__
 
