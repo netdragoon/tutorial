@@ -37,19 +37,18 @@ try
   //Método AddressInfo só retorna os 100 primeiros registros, ou seja,
   //coloque o maior detalhamento na cidade e endereço.
 
-AddressInfo addressInfo = null;
-using (AddressLoad addressLoad = new AddressLoad())  	
-{     
+  AddressInfo addressInfo = null;
 
-    AddressInfo addressInfo = addressLoad.AddressInfo(UfAddress.PR, "Colorado", "Ant")
+  AddressLoad addressLoad = new AddressLoad();         
 
-  	ZipCode[] zips = addressInfo.AddressList;
+  AddressInfo addressInfo = addressLoad.AddressInfo(UfAddress.SP, "SAO PAULO", "AVE");
 
-  	if (zips.Count() > 0)
-  	{
+  ZipCode[] zips = addressInfo.AddressList;
 
+  if (zips.Count() > 0)
+  {
 
-  	}
+  }
 
 } 
 catch (ZipCodeException ex)
@@ -67,21 +66,11 @@ public async Task<ActionResult> Address()
 
     AddressInfo addressInfo = null;
 
-    using (AddressLoad addressLoad = new AddressLoad())            
-    {
-
-        addressInfo = await addressLoad.AddressInfoAsync(UfAddress.PR, "Colorado", "Ant");
-
-        ZipCode[] zips = addressInfo.AddressList; 
-
-        if (zips.Count() > 0)
-        {
-
-
-        }   
-
-    }
+    AddressLoad addressLoad = new AddressLoad();
+    
+    addressInfo = await addressLoad.AddressInfoAsync(UfAddress.SP, "SAO PAULO", "AVE");
 
     return View(addressInfo);
+    
 }
 ```
