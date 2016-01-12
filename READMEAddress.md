@@ -45,7 +45,7 @@ try
 
   ZipCode[] zips = addressInfo.AddressList;
 
-  if (zips.Count() > 0)
+  if (zips != null && zips.Count() > 0)
   {
 
   }
@@ -71,6 +71,11 @@ public async Task<ActionResult> Address()
     addressInfo = await addressLoad.AddressInfoAsync(UfAddress.SP, "SAO PAULO", "AVE");
 
     ZipCode[] zips = addressInfo.AddressList;
+
+    if (zips != null && zips.Count() > 0)
+    {
+
+    }
     
     return View(addressInfo);
 
