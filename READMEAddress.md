@@ -1,7 +1,5 @@
 #Canducci Endereço
 
-###(version: 1.0.0)
-
 __Web Service http://viacep.com.br/__
 
 ##[Demo](http://canduccipackages.apphb.com/#/)
@@ -25,28 +23,35 @@ Declare o namespace `using Canducci.Address;`
 
 ###Busca de vários CEP informando UF, Cidade e Endereço?
 
+1) Simples
+
 ```Csharp
 
 try
 {
 
-	//Observações
-	//Cidade com no minimo 3 letras
-	//Endereço com minimo 3 letras
+  //Observações
+  //Cidade com no minimo 3 letras
+  //Endereço com minimo 3 letras
 
-	//Método AddressInfo só retorna os 100 primeiros registros.
-    using (AddressLoad addressLoad = new AddressLoad())
-   	using (AddressInfo addressInfo = addressLoad.AddressInfo(UfAddress.PR, "Colorado", "Ant"))
-   	{               
-    	ZipCode[] zips = addressInfo.AdressList; 
+  //Método AddressInfo só retorna os 100 primeiros registros, ou seja,
+  //coloque o maior detalhamento na cidade e endereço.
+  
+  AddressInfo addressInfo = null;
+  using (AddressLoad addressLoad = new AddressLoad())  	
+	{     
 
-    	if (zips.Count() > 0)
-    	{
+    AddressInfo addressInfo = addressLoad.AddressInfo(UfAddress.PR, "Colorado", "Ant")
+
+  	ZipCode[] zips = addressInfo.AddressList; 
+
+  	if (zips.Count() > 0)
+  	{
 
 
-    	}   
+  	}   
 
-   	} 
+	} 
 
 }
 catch (ZipCodeException ex)
@@ -54,4 +59,31 @@ catch (ZipCodeException ex)
     throw ex;
 }
 
+```
+
+2) Métodos Async (_Exemplo:_ Web >= `4.5`)
+
+```Csharp
+public async Task<ActionResult> Address()
+{
+
+    AddressInfo addressInfo = null;
+
+    using (AddressLoad addressLoad = new AddressLoad())            
+    {
+
+        addressInfo = await addressLoad.AddressInfoAsync(UfAddress.PR, "Colorado", "Ant");
+
+        ZipCode[] zips = addressInfo.AddressList; 
+
+        if (zips.Count() > 0)
+        {
+
+
+        }   
+
+    }
+
+    return View(addressInfo);
+}
 ```
