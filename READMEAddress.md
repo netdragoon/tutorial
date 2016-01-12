@@ -52,8 +52,6 @@ using (AddressLoad addressLoad = new AddressLoad())
   	}
 
 } 
-
-}
 catch (ZipCodeException ex)
 {
     throw ex;
