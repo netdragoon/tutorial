@@ -70,7 +70,9 @@ public async Task<ActionResult> Address()
     
     addressInfo = await addressLoad.AddressInfoAsync(UfAddress.SP, "SAO PAULO", "AVE");
 
-    return View(addressInfo);
+    ZipCode[] zips = addressInfo.AddressList;
     
+    return View(addressInfo);
+
 }
 ```
