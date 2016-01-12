@@ -36,22 +36,22 @@ try
 
   //Método AddressInfo só retorna os 100 primeiros registros, ou seja,
   //coloque o maior detalhamento na cidade e endereço.
-  
-  AddressInfo addressInfo = null;
-  using (AddressLoad addressLoad = new AddressLoad())  	
-	{     
+
+AddressInfo addressInfo = null;
+using (AddressLoad addressLoad = new AddressLoad())  	
+{     
 
     AddressInfo addressInfo = addressLoad.AddressInfo(UfAddress.PR, "Colorado", "Ant")
 
-  	ZipCode[] zips = addressInfo.AddressList; 
+  	ZipCode[] zips = addressInfo.AddressList;
 
   	if (zips.Count() > 0)
   	{
 
 
-  	}   
+  	}
 
-	} 
+} 
 
 }
 catch (ZipCodeException ex)
