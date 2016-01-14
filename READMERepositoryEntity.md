@@ -39,24 +39,6 @@ namespace WebApplication1.Models
         {
         }
     }
-
-    public abstract class RepositoryTagsContract : Repository<Tags, BaseEFEntities>,
-                                                   IRepository<Tags, BaseEFEntities>
-    {
-        public RepositoryTagsContract(BaseEFEntities ctx)
-            : base(ctx)
-        {
-
-        }
-    }
-    public sealed class RepositoryTags : RepositoryTagsContract
-    {
-        public RepositoryTags(BaseEFEntities ctx)
-            : base(ctx)
-        {
-
-        }
-    }
 }
 
 ```
@@ -87,7 +69,6 @@ public class UnityConfig
         
         container.RegisterType<BaseEFEntities>();            
         container.RegisterType<RepositoryNoticeContract, RepositoryNotice>();
-        container.RegisterType<RepositoryTagsContract, RepositoryTags>();
 
     }
 }
