@@ -74,3 +74,95 @@ public class UnityConfig
 }
 
 ```
+
+____
+
+__Controller__
+
+```Csharp
+public class NoticesController : Controller
+{
+    public readonly RepositoryNoticeContract repository;    
+    public NoticesController(RepositoryNoticeContract repository)
+    {
+        this.repository = repository;        
+    }
+
+```    
+
+_Completed Controller_
+
+```Csharp
+public class NoticesController : Controller
+{
+    public readonly RepositoryNoticeContract repository;
+    public readonly RepositoryTagsContract repositoryTags;
+    public NoticesController(RepositoryNoticeContract repository, 
+                             RepositoryTagsContract repositoryTags)
+    {
+        this.repository = repository;
+        this.repositoryTags = repositoryTags;
+    }        
+    
+    [AcceptVerbs("GET","POST")]
+    public async Task<ActionResult> Index(int? page, string filter)
+    {
+        int rows = 2;
+        ViewBag.filter = filter;
+        if (!string.IsNullOrEmpty(filter))
+        {
+            return View(await repository
+                .PaginationAsync(x => x.Title.Contains(filter), 
+                x => x.Id, (page ?? 1), rows));
+        }
+        return View(await repository
+            .PaginationAsync(x => x.Id, (page ?? 1), rows));
+    }
+
+    [HttpGet()]
+    public ActionResult Create()
+    {
+        ViewBag.TagId = new SelectList(repositoryTags.List(x => x.Description), 
+                                "Id", "Description");
+        return View();
+    }
+
+    [HttpPost()]
+    public async Task<ActionResult> Create(Notice notice)
+    {        
+        await repository.AddAsync(notice);
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet()]
+    public async Task<ActionResult> Edit(int id)
+    {
+        Notice notice = await repository.FindAsync(id);
+        ViewBag.TagId = new SelectList(repositoryTags.List(x => x.Description), 
+                                "Id", "Description", notice.TagId);
+        return View(notice);
+    }
+
+    [HttpPost()]
+    public async Task<ActionResult> Edit(int id, Notice notice)
+    {
+        await repository.EditAsync(notice);            
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet()]
+    public async Task<ActionResult> Delete(int id)
+    {
+        return View(await repository.FindAsync(id));
+    }
+
+    [HttpPost()]
+    public async Task<ActionResult> Delete(int id, Notice notice)
+    {
+        await repository.DeleteAsync(id);
+        return RedirectToAction("Index");
+    }
+
+}
+
+```    
