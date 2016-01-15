@@ -200,7 +200,7 @@ public class NoticesController : Controller
 ____
 __Methods__
 
-[Add](#add)
+[Add](#add) [Edit](#edit) [Delete](#delete)
 
 _Example class_
 
