@@ -291,7 +291,7 @@ Task<bool> DeleteAsync(IEnumerable<T> model);
 Task<bool> DeleteAsync(T model);
 Task<bool> DeleteAsync(params object[] key);
 Task<bool> DeleteAsync(Expression<Func<T, bool>> where);
-```Csharp
+````
 _Usage_
 
 ```Csharp
