@@ -222,6 +222,7 @@ _Implementation_
 ```Csharp
 T Add(T Model);        
 IEnumerable<T> Add(IEnumerable<T> models);
+
 //NET > 4 (Async Method).
 Task<T> AddAsync(T Model);
 Task<IEnumerable<T>> AddAsync(IEnumerable<T> models);
@@ -252,6 +253,7 @@ ____
 _Implementation_
 ```Csharp
 bool Edit(T model);
+
 //NET > 4 (Async Method).
 Task<bool> EditAsync(T model);
 ```
@@ -291,6 +293,7 @@ bool Delete(T model);
 bool Delete(IEnumerable<T> model);
 bool Delete(params object[] key);
 bool Delete(Expression<Func<T, bool>> where);
+
 //NET > 4 (Async Method).
 Task<bool> DeleteAsync(IEnumerable<T> model);
 Task<bool> DeleteAsync(T model);
@@ -328,6 +331,7 @@ _Implementation_
 ```Csharp
 T Find(params object[] key);
 T Find(Expression<Func<T, bool>> where);
+
 //NET > 4 (Async Method).
 Task<T> FindAsync(params object[] key);
 Task<T> FindAsync(Expression<Func<T, bool>> where);
@@ -484,9 +488,72 @@ IPagedList<Tags> Pagination = repTags.Pagination(o => o.Id, 1, 10);
 
 IPagedList<Tags> Pagination = repTags.Pagination(x => x.Id == 1, o => o.Id, 1, 10);
 
-IPagedList<ViewModel> Pagination = repTags.Pagination(o => o.Id, x => 
+IPagedList<ViewModel> PaginationViewModel = repTags.Pagination(o => o.Id, x => 
                         new ViewModel() { Id = x.Id, Title = x.Description }, 1, 10);
 
-IPagedList<ViewModel> Pagination = repTags.Pagination(x => x.Id == 1, o => o.Id, x => 
+IPagedList<ViewModel> PaginationViewModel = repTags.Pagination(x => x.Id == 1, o => o.Id, x => 
                         new ViewModel() { Id = x.Id, Title = x.Description }, 1, 10);
+```
+____
+
+####Count
+_Implementation_
+```Csharp
+long Count();
+long Count(Expression<Func<T, bool>> where);
+
+//NET > 4 (Async Method).
+Task<long> CountAsync();
+Task<long> CountAsync(Expression<Func<T, bool>> where);        
+#endif
+```
+_Usage_
+```Csharp
+long count = repTags.Count();
+long count = repTags.Count(x => x.Description.Contains("A"));
+```
+
+____
+####Create
+_Implementation_
+```Csharp
+DbSet<T1> Create<T1>()
+        where T1 : class, new();
+T Create();
+```
+_Usage_
+```Csharp
+Tags tag = repTags.Create();
+DbSet<Notice> notice = repTags.Create<Notice>();
+```
+
+____
+
+####GroupBy
+_Implementation_
+```Csharp
+IList<TSelect> GroupBy<TKey, TSelect>(Expression<Func<T, TKey>> keySelector, 
+            Expression<Func<IGrouping<TKey, T>, TSelect>> select);
+IList<TSelect> GroupBy<TKey, TSelect>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> keySelector, 
+            Expression<Func<IGrouping<TKey, T>, TSelect>> select);
+
+//NET > 4 (Async Method).
+Task<IList<TSelect>> GroupByAsync<TKey, TSelect>(Expression<Func<T, TKey>> keySelector, Expression<Func<IGrouping<TKey, T>, 
+            TSelect>> select);
+Task<IList<TSelect>> GroupByAsync<TKey, TSelect>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> keySelector, 
+            Expression<Func<IGrouping<TKey, T>, TSelect>> select);
+```
+_Usage_
+```Csharp
+var group = repTags.GroupBy(x => x.Id, x => new
+{
+    Key = x.Key,
+    Count = x.Count()
+});
+
+var group = repTags.GroupBy(x => x.Id > 0, x => x.Id, x => new
+{
+    Key = x.Key,
+    Count = x.Count()
+});
 ```
