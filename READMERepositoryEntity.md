@@ -200,6 +200,8 @@ public class NoticesController : Controller
 ____
 __Methods__
 
+[Add](#/Add)
+
 _Example class_
 
 ```Csharp
