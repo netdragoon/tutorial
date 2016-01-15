@@ -98,7 +98,7 @@ public class NoticesController : Controller
 
 ```    
 
-_Completed Controller_
+__Completed Controller__
 
 ```Csharp
 public class NoticesController : Controller
@@ -190,9 +190,50 @@ public class NoticesController : Controller
         await repository.DeleteAsync(id);
 
         return RedirectToAction("Index");
-        
+
     }
 
 }
 
-```    
+```   
+
+____
+__Methods__
+
+_Example class_
+
+```Csharp
+public class Tags
+{        
+    public int Id { get; set; }
+    public string Description { get; set; }        
+}
+```
+_Repository of class Tags_
+
+```Csharp
+BaseEFContext Context = new BaseEFContext();
+RepositoryTagsContract repTags = new RepositoryTags(Context);
+``` 
+
+###Add
+
+```Csharp
+T Add(T Model);        
+IEnumerable<T> Add(IEnumerable<T> models);
+//NET > 4 (Async Method).
+Task<T> AddAsync(T Model);
+Task<IEnumerable<T>> AddAsync(IEnumerable<T> models);
+
+```
+_Usage:_
+```Csharp
+Tags tag = new Tags();
+tag.Description = "Example";
+
+repTags.Add(tag);
+```
+
+
+###Edit
+
