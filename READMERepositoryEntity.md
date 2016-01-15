@@ -198,7 +198,8 @@ public class NoticesController : Controller
 ```   
 
 ____
-__Methods__
+
+####Methods
 
 [Add](#add) - [Edit](#edit) - [Delete](#delete) - [Find](#find) - [All](#all) - [List](#list)
 [Pagination](pagination) - [Count](#count) - [Create](#create) - [GroupBy](#groupby)
@@ -251,7 +252,7 @@ tag1.Description = "Example 1";
 
 repTags.Add(new List<Tags>() { tag0, tag1 });
 ```
-
+[back](#methods)
 ____
 
 ####Edit
@@ -288,7 +289,7 @@ if (tag != null)
 }
 
 ```
-
+[back](#methods)
 ____
 
 ####Delete
@@ -328,7 +329,7 @@ or
 ```Csharp
 repTags.Delete(x => x.Id == 1);
 ```
-
+[back](#methods)
 ____
 
 ####Find
@@ -349,7 +350,7 @@ or
 ```Csharp
 Tags tag1 = repTags.Find(x => x.Id == 1);
 ```
-
+[back](#methods)
 ____
 
 ####All
@@ -385,6 +386,8 @@ IEnumerable<ViewModel> viewModelList = repTags.All(
     x => new ViewModel() { Id = x.Id, Title = x.Description }
 );
 ```
+[back](#methods)
+____
 
 ###List
 _Implementation_
@@ -457,7 +460,7 @@ IList<ViewModel> tagListViewModel = repTags.List(x => x.Id == 1, o => o.Descript
             x => new ViewModel() { Id = x.Id, Title = x.Description }, 1, 10);
 
 ```
-
+[back](#methods)
 ____
 
 ####Pagination
@@ -499,6 +502,7 @@ IPagedList<ViewModel> PaginationViewModel = repTags.Pagination(o => o.Id, x =>
 IPagedList<ViewModel> PaginationViewModel = repTags.Pagination(x => x.Id == 1, o => o.Id, x => 
                         new ViewModel() { Id = x.Id, Title = x.Description }, 1, 10);
 ```
+[back](#methods)
 ____
 
 ####Count
@@ -517,7 +521,7 @@ _Usage_
 long count = repTags.Count();
 long count = repTags.Count(x => x.Description.Contains("A"));
 ```
-
+[back](#methods)
 ____
 ####Create
 _Implementation_
@@ -531,7 +535,7 @@ _Usage_
 Tags tag = repTags.Create();
 DbSet<Notice> notice = repTags.Create<Notice>();
 ```
-
+[back](#methods)
 ____
 
 ####GroupBy
@@ -562,7 +566,7 @@ var group = repTags.GroupBy(x => x.Id > 0, x => x.Id, x => new
     Count = x.Count()
 });
 ```
-
+[back](#methods)
 ____
 
 ####Sum
@@ -619,6 +623,7 @@ int soma = repTags.Sum(x => x.Id);
 int soma = repTags.Sum(x => x.Id > 0, x => x.Id);
 ```
 
+[back](#methods)
 ____
 
 ####Query
@@ -636,20 +641,28 @@ IQueryable<Tags> query1 = repTags.Query(x => x.Notice);
 DbSqlQuery<Tags> query2 = repTags.Query("SELECT * FROM tags WHERE Id=@p0", 1);
 DbRawSqlQuery<Tags> query3 = repTags.Query<Tags>("SELECT * FROM tags WHERE Id=@p0", 1);
 ```
+[back](#methods)
 ____
 
 ####QueryCommand
 _Implementation_
 ```Csharp
 int QueryCommand(string sql, params object[] parameters);
-int QueryCommand(TransactionalBehavior transactionalBehavior, string sql, params object[] parameters);
+
+int QueryCommand(TransactionalBehavior transactionalBehavior, string sql, 
+            params object[] parameters);
 
 //NET > 4 (Async Method).
 Task<int> QueryCommandAsync(string sql, params object[] parameters);
-Task<int> QueryCommandAsync(string sql, CancellationToken cancellationToken, params object[] parameters);
-Task<int> QueryCommandAsync(TransactionalBehavior transactionalBehavior, string sql, params object[] parameters);
-Task<int> QueryCommandAsync(TransactionalBehavior transactionalBehavior, string sql, CancellationToken cancellationToken, 
+
+Task<int> QueryCommandAsync(string sql, CancellationToken cancellationToken, 
             params object[] parameters);
+
+Task<int> QueryCommandAsync(TransactionalBehavior transactionalBehavior, string sql, 
+            params object[] parameters);
+
+Task<int> QueryCommandAsync(TransactionalBehavior transactionalBehavior, string sql, 
+            CancellationToken cancellationToken, params object[] parameters);
 ```
 _Usage_
 ```Csharp
@@ -657,7 +670,7 @@ int count = repTags.QueryCommand("INSERT INTO Tags(Description) VALUES(@p0)", "E
 int count = repTags.QueryCommand(TransactionalBehavior.DoNotEnsureTransaction,  
             "INSERT INTO Tags(Description) VALUES(@p0)", "Example");
 ```
-
+[back](#methods)
 ____
 
 
@@ -679,3 +692,6 @@ if (tag != null)
     repTags.Save();
 }
 ```
+[back](#methods)
+
+____
