@@ -342,3 +342,24 @@ Tags tag1 = repTags.Find(x => x.Id == 1);
 
 ____
 
+####All
+```Csharp
+IEnumerable<T> All(bool AsNoTracking = true);
+IEnumerable<T> All<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);        
+IList<TResult> All<TResult, Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+//NET > 4 (Async Method).
+Task<IList<T>> AllAsync(bool AsNoTracking = true);
+Task<IList<T>> AllAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+Task<IList<TResult>> AllAsync<TResult, Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+```
+_Usage_
+```Csharp
+IEnumerable<Tags> tagList = repTags.All(); //or repTags.All(false)
+IEnumerable<Tags> tagList = repTags.All(x => x.Id == 1, o => o.Description);
+//With viewModel
+IEnumerable<ViewModel> viewModelList = repTags.All(
+    x => x.Id == 1, 
+    o => o.Description, 
+    x => new ViewModel() { Id = x.Id, Title = x.Description }
+);
+```
