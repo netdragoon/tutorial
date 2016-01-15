@@ -216,7 +216,7 @@ BaseEFContext Context = new BaseEFContext();
 RepositoryTagsContract repTags = new RepositoryTags(Context);
 ``` 
 
-###Add
+####Add
 
 ```Csharp
 T Add(T Model);        
@@ -243,9 +243,41 @@ tag0.Description = "Example 0";
 Tags tag1 = new Tags();
 tag1.Description = "Example 1";
 
-repTags.Add(new List<Tags>(2) { tag0, tag1 });
+repTags.Add(new List<Tags>() { tag0, tag1 });
 ```
 
+####Edit
 
-###Edit
+```Csharp
+bool Edit(T model);
+//NET > 4 (Async Method).
+Task<bool> EditAsync(T model);
+```
 
+_Usage_
+
+```Csharp
+Tags tag = repTags.Find(1);
+
+if (tag != null)
+{
+    tag.Description = "Example Edit 1";
+}
+
+repTags.Edit(tag);
+```
+
+Or
+
+```Csharp
+Tags tag = repTags.Find(1);
+
+if (tag != null)
+{
+    tag.Description = "Example Edit 1";
+    repTags.Save();
+}
+
+```
+
+####Delete
