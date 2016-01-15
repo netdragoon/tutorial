@@ -538,10 +538,10 @@ IList<TSelect> GroupBy<TKey, TSelect>(Expression<Func<T, bool>> where, Expressio
             Expression<Func<IGrouping<TKey, T>, TSelect>> select);
 
 //NET > 4 (Async Method).
-Task<IList<TSelect>> GroupByAsync<TKey, TSelect>(Expression<Func<T, TKey>> keySelector, Expression<Func<IGrouping<TKey, T>, 
-            TSelect>> select);
-Task<IList<TSelect>> GroupByAsync<TKey, TSelect>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> keySelector, 
+Task<IList<TSelect>> GroupByAsync<TKey, TSelect>(Expression<Func<T, TKey>> keySelector, 
             Expression<Func<IGrouping<TKey, T>, TSelect>> select);
+Task<IList<TSelect>> GroupByAsync<TKey, TSelect>(Expression<Func<T, bool>> where, 
+            Expression<Func<T, TKey>> keySelector, Expression<Func<IGrouping<TKey, T>, TSelect>> select);
 ```
 _Usage_
 ```Csharp
@@ -556,4 +556,121 @@ var group = repTags.GroupBy(x => x.Id > 0, x => x.Id, x => new
     Key = x.Key,
     Count = x.Count()
 });
+```
+
+____
+
+####Sum
+_Implementation_
+```Csharp
+decimal Sum(Expression<Func<T, decimal>> selector);
+decimal? Sum(Expression<Func<T, decimal?>> selector);
+double Sum(Expression<Func<T, double>> selector);
+double? Sum(Expression<Func<T, double?>> selector);
+float Sum(Expression<Func<T, float>> selector);
+float? Sum(Expression<Func<T, float?>> selector);
+int Sum(Expression<Func<T, int>> selector);
+int? Sum(Expression<Func<T, int?>> selector);
+long Sum(Expression<Func<T, long>> selector);
+long? Sum(Expression<Func<T, long?>> selector);
+
+decimal Sum(Expression<Func<T, bool>> where, Expression<Func<T, decimal>> selector);
+decimal? Sum(Expression<Func<T, bool>> where, Expression<Func<T, decimal?>> selector);
+double Sum(Expression<Func<T, bool>> where, Expression<Func<T, double>> selector);
+double? Sum(Expression<Func<T, bool>> where, Expression<Func<T, double?>> selector);
+float Sum(Expression<Func<T, bool>> where, Expression<Func<T, float>> selector);
+float? Sum(Expression<Func<T, bool>> where, Expression<Func<T, float?>> selector);
+int Sum(Expression<Func<T, bool>> where, Expression<Func<T, int>> selector);
+int? Sum(Expression<Func<T, bool>> where, Expression<Func<T, int?>> selector);
+long Sum(Expression<Func<T, bool>> where, Expression<Func<T, long>> selector);
+long? Sum(Expression<Func<T, bool>> where, Expression<Func<T, long?>> selector);
+
+//NET > 4 (Async Method).
+Task<decimal> SumAsync(Expression<Func<T, decimal>> selector);
+Task<decimal?> SumAsync(Expression<Func<T, decimal?>> selector);
+Task<double> SumAsync(Expression<Func<T, double>> selector);
+Task<double?> SumAsync(Expression<Func<T, double?>> selector);
+Task<float> SumAsync(Expression<Func<T, float>> selector);
+Task<float?> SumAsync(Expression<Func<T, float?>> selector);
+Task<int> SumAsync(Expression<Func<T, int>> selector);
+Task<int?> SumAsync(Expression<Func<T, int?>> selector);
+Task<long> SumAsync(Expression<Func<T, long>> selector);
+Task<long?> SumAsync(Expression<Func<T, long?>> selector);
+
+Task<decimal> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, decimal>> selector);
+Task<decimal?> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, decimal?>> selector);
+Task<double> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, double>> selector);
+Task<double?> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, double?>> selector);
+Task<float> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, float>> selector);
+Task<float?> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, float?>> selector);
+Task<int> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, int>> selector);
+Task<int?> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, int?>> selector);
+Task<long> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, long>> selector);
+Task<long?> SumAsync(Expression<Func<T, bool>> where, Expression<Func<T, long?>> selector);
+```
+_Usage_
+```Csharp
+int soma = repTags.Sum(x => x.Id);
+int soma = repTags.Sum(x => x.Id > 0, x => x.Id);
+```
+
+____
+
+####Query
+_Implementation_
+```Csharp
+IQueryable<T> Query();
+IQueryable<T> Query<T1>(params Expression<Func<T, T1>>[] includes);
+DbSqlQuery<T> Query(string sql, params object[] parameters);
+DbRawSqlQuery<T1> Query<T1>(string sql, params object[] parameters);
+```
+_Usage_
+```Csharp
+IQueryable<Tags> query0 = repTags.Query();
+IQueryable<Tags> query1 = repTags.Query(x => x.Notice);
+DbSqlQuery<Tags> query2 = repTags.Query("SELECT * FROM tags WHERE Id=@p0", 1);
+DbRawSqlQuery<Tags> query3 = repTags.Query<Tags>("SELECT * FROM tags WHERE Id=@p0", 1);
+```
+____
+
+####QueryCommand
+_Implementation_
+```Csharp
+int QueryCommand(string sql, params object[] parameters);
+int QueryCommand(TransactionalBehavior transactionalBehavior, string sql, params object[] parameters);
+
+//NET > 4 (Async Method).
+Task<int> QueryCommandAsync(string sql, params object[] parameters);
+Task<int> QueryCommandAsync(string sql, CancellationToken cancellationToken, params object[] parameters);
+Task<int> QueryCommandAsync(TransactionalBehavior transactionalBehavior, string sql, params object[] parameters);
+Task<int> QueryCommandAsync(TransactionalBehavior transactionalBehavior, string sql, CancellationToken cancellationToken, 
+            params object[] parameters);
+```
+_Usage_
+```Csharp
+int count = repTags.QueryCommand("INSERT INTO Tags(Description) VALUES(@p0)", "Example");
+int count = repTags.QueryCommand(TransactionalBehavior.DoNotEnsureTransaction,  
+            "INSERT INTO Tags(Description) VALUES(@p0)", "Example");
+```
+
+____
+
+
+####QueryCommand
+_Implementation_
+```Csharp
+int Save();
+//NET > 4 (Async Method).
+Task<int> SaveAsync();
+
+```
+_Usage_
+```Csharp
+Tags tag = repTags.Find(1);
+
+if (tag != null)
+{
+    tag.Description = "Example Edit 1";
+    repTags.Save();
+}
 ```
