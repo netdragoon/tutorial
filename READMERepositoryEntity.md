@@ -201,8 +201,10 @@ ____
 
 ####Methods
 
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination)  |
-| [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand)  |[Save](#save)  |
+| [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) |[Save](#save)  |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 
 
 _Example class_
