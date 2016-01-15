@@ -200,7 +200,10 @@ public class NoticesController : Controller
 ____
 __Methods__
 
-[Add](#add) [Edit](#edit) [Delete](#delete)
+[Add](#add) - [Edit](#edit) - [Delete](#delete) - [Find](#find) - [All](#all) - [List](#list)
+[Pagination](pagination) - [Count](#count) - [Create](#create) - [GroupBy](#groupby)
+[Sum](#sum) - [Query](#query) - [QueryCommand](#querycommand) - [Save](#save)
+
 
 _Example class_
 
@@ -658,7 +661,7 @@ int count = repTags.QueryCommand(TransactionalBehavior.DoNotEnsureTransaction,
 ____
 
 
-####QueryCommand
+####Save
 _Implementation_
 ```Csharp
 int Save();
