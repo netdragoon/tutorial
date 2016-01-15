@@ -218,7 +218,7 @@ RepositoryTagsContract repTags = new RepositoryTags(Context);
 ____
 
 ####Add
-
+_Implementation_
 ```Csharp
 T Add(T Model);        
 IEnumerable<T> Add(IEnumerable<T> models);
@@ -228,7 +228,6 @@ Task<IEnumerable<T>> AddAsync(IEnumerable<T> models);
 
 ```
 _Usage:_
-
 
 ```Csharp
 Tags tag = new Tags();
@@ -250,7 +249,7 @@ repTags.Add(new List<Tags>() { tag0, tag1 });
 ____
 
 ####Edit
-
+_Implementation_
 ```Csharp
 bool Edit(T model);
 //NET > 4 (Async Method).
@@ -286,6 +285,7 @@ if (tag != null)
 ____
 
 ####Delete
+_Implementation_
 ```Csharp
 bool Delete(T model);
 bool Delete(IEnumerable<T> model);
@@ -324,6 +324,7 @@ repTags.Delete(x => x.Id == 1);
 ____
 
 ####Find
+_Implementation_
 ```Csharp
 T Find(params object[] key);
 T Find(Expression<Func<T, bool>> where);
@@ -343,18 +344,23 @@ Tags tag1 = repTags.Find(x => x.Id == 1);
 ____
 
 ####All
+_Implementation_
 ```Csharp
 IEnumerable<T> All(bool AsNoTracking = true);
+
 IEnumerable<T> All<Tkey>(Expression<Func<T, bool>> where, 
-            Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);                    
+            Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+
 IList<TResult> All<TResult, Tkey>(Expression<Func<T, bool>> where, 
             Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
             bool AsNoTracking = true);
 
 //NET > 4 (Async Method).
 Task<IList<T>> AllAsync(bool AsNoTracking = true);
+
 Task<IList<T>> AllAsync<Tkey>(Expression<Func<T, bool>> where, 
             Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+
 Task<IList<TResult>> AllAsync<TResult, Tkey>(Expression<Func<T, bool>> where, 
             Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
             bool AsNoTracking = true);
@@ -372,6 +378,7 @@ IEnumerable<ViewModel> viewModelList = repTags.All(
 ```
 
 ###List
+_Implementation_
 ```
 IList<T> List(bool AsNoTracking = true);
 
@@ -379,42 +386,45 @@ IList<T> List<Tkey>(Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true)
 
 IList<T> List<Tkey>(Expression<Func<T, Tkey>> orderBy, int page, int total = 10, bool AsNoTracking = true);
 
-IList<T> List<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+IList<T> List<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, 
+            bool AsNoTracking = true);
 
 IList<T> List<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, int page, int total = 10, 
-        bool AsNoTracking = true);
+            bool AsNoTracking = true);
 
 IList<TResult> List<TResult, Tkey>(Expression<Func<T, Tkey>> orderBy, 
-        Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+            Expression<Func<T, TResult>> select, bool AsNoTracking = true);
 
 IList<TResult> List<TResult, Tkey>(Expression<Func<T, bool>> where, 
-        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+            Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
 
 IList<TResult> List<TResult, Tkey>(Expression<Func<T, bool>> where, 
-        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, int page, int total = 10, 
-        bool AsNoTracking = true);
+            Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, int page, int total = 10, 
+            bool AsNoTracking = true);
 
 //NET > 4 (Async Method).
 Task<IList<T>> ListAsync(bool AsNoTracking = true);
 
 Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
 
-Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, Tkey>> orderBy, int page, int total = 10,bool AsNoTracking = true);
+Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, Tkey>> orderBy, int page, int total = 10,
+            bool AsNoTracking = true);
 
-Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, 
+            bool AsNoTracking = true);
 
-Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, int page, int total = 10, 
-        bool AsNoTracking = true);
+Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, 
+            int page, int total = 10, bool AsNoTracking = true);
 
 Task<IList<TResult>> ListAsync<TResult, Tkey>(Expression<Func<T, Tkey>> orderBy, 
-        Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+            Expression<Func<T, TResult>> select, bool AsNoTracking = true);
 
 Task<IList<TResult>> ListAsync<TResult, Tkey>(Expression<Func<T, bool>> where, 
-        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+            Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
 
 Task<IList<TResult>> ListAsync<TResult, Tkey>(Expression<Func<T, bool>> where, 
-        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, int page, int total = 10, 
-        bool AsNoTracking = true);
+            Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, int page, int total = 10, 
+            bool AsNoTracking = true);
 ```
 _Usage_
 ```Csharp
@@ -442,14 +452,15 @@ IList<ViewModel> tagListViewModel = repTags.List(x => x.Id == 1, o => o.Descript
 ____
 
 ####Pagination
+_Implementation_
 ```Csharp
 IPagedList<T> Pagination<TOrderBy>(Expression<Func<T, TOrderBy>> orderBy, int page, int total = 10);
 
-IPagedList<TResult> Pagination<TResult, TOrderBy>(Expression<Func<T, TOrderBy>> orderBy, Expression<Func<T, TResult>> select,
-             int page, int total = 10);
+IPagedList<TResult> Pagination<TResult, TOrderBy>(Expression<Func<T, TOrderBy>> orderBy, 
+            Expression<Func<T, TResult>> select, int page, int total = 10);
 
-IPagedList<T> Pagination<TOrderBy>(Expression<Func<T, bool>> where, Expression<Func<T, TOrderBy>> orderBy, int page,
-            int total = 10);
+IPagedList<T> Pagination<TOrderBy>(Expression<Func<T, bool>> where, Expression<Func<T, TOrderBy>> orderBy, 
+            int page, int total = 10);
 
 IPagedList<TResult> Pagination<TResult, TOrderBy>(Expression<Func<T, bool>> where, 
             Expression<Func<T, TOrderBy>> orderBy, Expression<Func<T, TResult>> select, int page, int total = 10);
@@ -460,8 +471,8 @@ Task<IPagedList<T>> PaginationAsync<TOrderBy>(Expression<Func<T, TOrderBy>> orde
 Task<IPagedList<TResult>> PaginationAsync<TResult, TOrderBy>(Expression<Func<T, TOrderBy>> orderBy,
             Expression<Func<T, TResult>> select, int page, int total = 10);
 
-Task<IPagedList<T>> PaginationAsync<TOrderBy>(Expression<Func<T, bool>> where, Expression<Func<T, TOrderBy>> orderBy, 
-            int page, int total = 10);
+Task<IPagedList<T>> PaginationAsync<TOrderBy>(Expression<Func<T, bool>> where, 
+            Expression<Func<T, TOrderBy>> orderBy, int page, int total = 10);
 
 Task<IPagedList<TResult>> PaginationAsync<TResult, TOrderBy>(Expression<Func<T, bool>> where, 
             Expression<Func<T, TOrderBy>> orderBy, Expression<Func<T, TResult>> select, int page, int total = 10);
