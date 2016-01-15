@@ -227,11 +227,23 @@ Task<IEnumerable<T>> AddAsync(IEnumerable<T> models);
 
 ```
 _Usage:_
+
+
 ```Csharp
 Tags tag = new Tags();
 tag.Description = "Example";
 
 repTags.Add(tag);
+```
+
+```Csharp
+Tags tag0 = new Tags();
+tag0.Description = "Example 0";
+
+Tags tag1 = new Tags();
+tag1.Description = "Example 1";
+
+repTags.Add(new List<Tags>(2) { tag0, tag1 });
 ```
 
 
