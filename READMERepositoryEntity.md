@@ -345,12 +345,19 @@ ____
 ####All
 ```Csharp
 IEnumerable<T> All(bool AsNoTracking = true);
-IEnumerable<T> All<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);        
-IList<TResult> All<TResult, Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+IEnumerable<T> All<Tkey>(Expression<Func<T, bool>> where, 
+            Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);                    
+IList<TResult> All<TResult, Tkey>(Expression<Func<T, bool>> where, 
+            Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
+            bool AsNoTracking = true);
+
 //NET > 4 (Async Method).
 Task<IList<T>> AllAsync(bool AsNoTracking = true);
-Task<IList<T>> AllAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
-Task<IList<TResult>> AllAsync<TResult, Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+Task<IList<T>> AllAsync<Tkey>(Expression<Func<T, bool>> where, 
+            Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+Task<IList<TResult>> AllAsync<TResult, Tkey>(Expression<Func<T, bool>> where, 
+            Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
+            bool AsNoTracking = true);
 ```
 _Usage_
 ```Csharp
@@ -362,4 +369,56 @@ IEnumerable<ViewModel> viewModelList = repTags.All(
     o => o.Description, 
     x => new ViewModel() { Id = x.Id, Title = x.Description }
 );
+```
+
+###List
+```
+IList<T> List(bool AsNoTracking = true);
+IList<T> List<Tkey>(Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+IList<T> List<Tkey>(Expression<Func<T, Tkey>> orderBy, int page, int total = 10, 
+        bool AsNoTracking = true);
+IList<T> List<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, 
+        bool AsNoTracking = true);
+IList<T> List<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, 
+        int page, int total = 10, bool AsNoTracking = true);
+IList<TResult> List<TResult, Tkey>(Expression<Func<T, Tkey>> orderBy, 
+        Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+IList<TResult> List<TResult, Tkey>(Expression<Func<T, bool>> where, 
+        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
+        bool AsNoTracking = true);
+IList<TResult> List<TResult, Tkey>(Expression<Func<T, bool>> where, 
+        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
+        int page, int total = 10, bool AsNoTracking = true);
+//NET > 4 (Async Method).
+Task<IList<T>> ListAsync(bool AsNoTracking = true);
+Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, Tkey>> orderBy, bool AsNoTracking = true);
+Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, Tkey>> orderBy, int page, int total = 10, 
+        bool AsNoTracking = true);
+Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, 
+        bool AsNoTracking = true);
+Task<IList<T>> ListAsync<Tkey>(Expression<Func<T, bool>> where, Expression<Func<T, Tkey>> orderBy, 
+        int page, int total = 10, bool AsNoTracking = true);
+Task<IList<TResult>> ListAsync<TResult, Tkey>(Expression<Func<T, Tkey>> orderBy, 
+        Expression<Func<T, TResult>> select, bool AsNoTracking = true);
+Task<IList<TResult>> ListAsync<TResult, Tkey>(Expression<Func<T, bool>> where, 
+        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
+        bool AsNoTracking = true);
+Task<IList<TResult>> ListAsync<TResult, Tkey>(Expression<Func<T, bool>> where, 
+        Expression<Func<T, Tkey>> orderBy, Expression<Func<T, TResult>> select, 
+        int page, int total = 10, bool AsNoTracking = true);
+```
+_Usage_
+```Csharp
+IList<Tags> tagList = repTags.List(); //or repTags.List(false);
+IList<Tags> tagList = repTags.List(o => o.Description);            
+IList<Tags> tagList = repTags.List(x => x.Id == 1, o => o.Description);
+IList<Tags> tagList = repTags.List(o => o.Description, 1, 10);
+IList<Tags> tagList = repTags.List(x => x.Id == 1, o => o.Description, 1, 10);
+IList<ViewModel> tagListViewModel = repTags.List(o => o.Description, 
+            x => new ViewModel() { Id = x.Id, Title = x.Description });
+IList<ViewModel> tagListViewModel = repTags.List(x => x.Id == 1, o => o.Description, 
+            x => new ViewModel() { Id = x.Id, Title = x.Description });
+IList<ViewModel> tagListViewModel = repTags.List(x => x.Id == 1, o => o.Description, 
+            x => new ViewModel() { Id = x.Id, Title = x.Description }, 1, 10);
+
 ```
