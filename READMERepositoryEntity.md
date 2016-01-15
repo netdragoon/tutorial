@@ -281,3 +281,39 @@ if (tag != null)
 ```
 
 ####Delete
+```Csharp
+bool Delete(T model);
+bool Delete(IEnumerable<T> model);
+bool Delete(params object[] key);
+bool Delete(Expression<Func<T, bool>> where);
+//NET > 4 (Async Method).
+Task<bool> DeleteAsync(IEnumerable<T> model);
+Task<bool> DeleteAsync(T model);
+Task<bool> DeleteAsync(params object[] key);
+Task<bool> DeleteAsync(Expression<Func<T, bool>> where);
+```Csharp
+_Usage_
+
+```Csharp
+Tags tag = repTags.Find(1);
+
+if (tag != null)
+{
+    repTags.Delete(tag);
+}
+```
+or
+```Csharp
+repTags.Delete(1);
+```
+or
+```Csharp
+IEnumerable<Tags> tagsList = repTags.List(x => x.Id == 1, o => o.Id, false);
+repTags.Delete(tagsList);
+```
+or
+```Csharp
+repTags.Delete(x => x.Id == 1);
+```
+
+####Find
