@@ -215,6 +215,7 @@ _Repository of class Tags_
 BaseEFContext Context = new BaseEFContext();
 RepositoryTagsContract repTags = new RepositoryTags(Context);
 ``` 
+____
 
 ####Add
 
@@ -245,6 +246,8 @@ tag1.Description = "Example 1";
 
 repTags.Add(new List<Tags>() { tag0, tag1 });
 ```
+
+____
 
 ####Edit
 
@@ -279,6 +282,8 @@ if (tag != null)
 }
 
 ```
+
+____
 
 ####Delete
 ```Csharp
@@ -316,4 +321,24 @@ or
 repTags.Delete(x => x.Id == 1);
 ```
 
+____
+
 ####Find
+```Csharp
+T Find(params object[] key);
+T Find(Expression<Func<T, bool>> where);
+//NET > 4 (Async Method).
+Task<T> FindAsync(params object[] key);
+Task<T> FindAsync(Expression<Func<T, bool>> where);
+```
+_Usage_
+```Csharp
+Tags tag = repTags.Find(1);
+```
+or
+```Csharp
+Tags tag1 = repTags.Find(x => x.Id == 1);
+```
+
+____
+
