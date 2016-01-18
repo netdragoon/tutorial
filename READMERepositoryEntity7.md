@@ -97,3 +97,75 @@ namespace WebApplication1.Models
 }
 
 ```
+
+In the `Startup.cs`:
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+     
+        services.AddMvc();
+
+        services.AddEntityFramework()
+            .AddSqlServer();
+
+        services.AddTransient<Database>();
+        services.AddTransient<RepositoryCarContract, RepositoryCar>();
+
+    }
+
+In the _Controller_:
+
+    using Microsoft.AspNet.Mvc;
+    using WebApplication6.Models;
+    namespace WebApplication6.Controllers
+    {
+        public class CarsController : Controller
+        {
+
+            public readonly RepositoryCarContract repository;
+            public CarsController(RepositoryCarContract repository)
+            {
+                this.repository = repository;
+            }
+
+            [HttpGet()]
+            public IActionResult Index()
+            {
+                return View(repository.All(o => o.Id));
+            }
+
+            [HttpGet()]
+            public IActionResult Create()
+            {
+                return View();
+            }
+
+            [HttpPost()]
+            public IActionResult Create(Car car)
+            {
+                repository.Add(car);
+                return RedirectToAction("Index");
+            }
+
+            [HttpGet()]
+            public IActionResult Edit(int id)
+            {
+                return View(repository.Find(x => x.Id == id));
+            }
+
+            [HttpPost()]
+            public IActionResult Edit(int id, Car car)
+            {
+                repository.Update(car);
+                return RedirectToAction("Index");
+            }
+
+            [HttpGet()]
+            public IActionResult Delete(int id)
+            {
+                repository.Remove(repository.Find(x => x.Id == id));
+                return RedirectToAction("Index");
+            }
+
+        }
+    }
