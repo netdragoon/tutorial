@@ -201,7 +201,7 @@ ____
 
 ####Methods
 
-| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) |
+| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) | [GroupOrderBy](#grouporderby)] | [CreateAndAttach](#createandattach)
 
 
 _Example class_
@@ -693,3 +693,42 @@ if (tag != null)
 [back](#methods)
 
 ____
+
+####CreateAndAttach (version >= 1.0.1)
+_Implementation_
+```Csharp
+T CreateAndAttach();
+
+```
+_Usage_
+```Csharp
+Tags tag = repTags.CreateAndAttach();
+tag.Description = "New Save";
+repTags.Save();
+
+```
+[back](#methods)
+
+____
+
+####GroupOrderBy (version >= 1.0.2)
+_Implementation_
+```Csharp
+IPagedList<T> Pagination(GroupOrderBy<T> groupOrderBy, Expression<Func<T, bool>> where, 
+            int page, int total = 10);
+
+//NET > 4 (Async Method).
+Task<IPagedList<T>> PaginationAsync(GroupOrderBy<T> groupOrderBy, Expression<Func<T, bool>> where, 
+            int page, int total = 10);
+
+```
+_Usage_
+```Csharp
+GroupOrderBy<Tags> groupOrderBy = GroupOrderBy<Tags>.Create()
+                .Add(x => x.Description, Order.Asc)
+                .Add(x => x.Id, Order.Desc);
+
+var result = repTags.Pagination(groupOrderBy, x.Title.Contains(filter), (page ?? 1), rows)
+
+```
+[back](#methods)
