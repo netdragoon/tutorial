@@ -201,7 +201,7 @@ ____
 
 ####Methods
 
-| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) | [GroupOrderBy](#grouporderby)] | [CreateAndAttach](#createandattach)
+| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) | [GroupOrderBy](#grouporderby) | [CreateAndAttach](#createandattach)
 
 
 _Example class_
