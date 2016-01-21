@@ -713,6 +713,9 @@ ____
 
 ####GroupOrderBy (version >= 1.0.2)
 _Implementation_
+    
+    using Canducci.EntityFramework.Repository.Util;
+
 ```Csharp
 IPagedList<T> Pagination(GroupOrderBy<T> groupOrderBy, Expression<Func<T, bool>> where, 
             int page, int total = 10);
