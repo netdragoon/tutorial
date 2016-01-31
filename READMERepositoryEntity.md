@@ -201,7 +201,7 @@ ____
 
 ####Methods
 
-| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) | [GroupOrderBy](#grouporderby-version--102) | [CreateAndAttach](#createandattach-version--101)
+| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) | [GroupOrderBy](#grouporderby-version--102) | [CreateAndAttach](#createandattach-version--101) | [IConfiguration](#iconfiguration) | [Action<IConfiguration>](#action) | [IConfiguration Implementation](#resume)
 
 
 _Example class_
@@ -758,7 +758,8 @@ configNotice.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.Desc);
 
 IEnumerable<Notice> n9 = rep.All(configNotice);
 
-ConfigurationOrderBySelect<Notice, ViewModel> configNoticeViewModel = new ConfigurationOrderBySelect<Notice, ViewModel>();
+ConfigurationOrderBySelect<Notice, ViewModel> configNoticeViewModel = 
+                                new ConfigurationOrderBySelect<Notice, ViewModel>();
 configNoticeViewModel.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.Desc);
 configNoticeViewModel.Select.Set(s => new ViewModel() { Id = s.Id, Title = s.Title });
 
@@ -769,3 +770,78 @@ configNotice.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.Desc);
 
 IList<Notice> n18 = rep.List(configNotice);
 ```
+[back](#methods)
+____
+
+####Action
+
+_Implementation_
+    
+    using Canducci.EntityFramework.Repository.Util;
+
+```Chsarp
+//ALL
+IEnumerable<T> All<TConfiguration>(Action<TConfiguration> configuration)
+            where TConfiguration : IConfiguration<T>;
+IList<TResult> All<TConfiguration, TResult>(Action<TConfiguration> configuration)
+    where TConfiguration : IConfiguration<T, TResult>;
+
+//LIST
+IList<T> List<TConfiguration>(Action<TConfiguration> configuration)
+            where TConfiguration : IConfiguration<T>;
+IList<TResult> List<TConfiguration, TResult>(Action<TConfiguration> configuration)
+    where TConfiguration : IConfiguration<T, TResult>;    
+```                
+_Usage_   
+```Csharp
+//ALL
+IEnumerable<Notice> n11 = rep.All<ConfigurationOrderByLimit<Notice>>(a =>
+{
+    a.OrderBy.Add(x => x.Id);
+    a.Page = 1;
+    a.Total = 2;
+});
+IList<ViewModel> n12 = rep.All<ConfigurationOrderBySelect<Notice, ViewModel>, ViewModel>(a =>
+{
+    a.OrderBy.Add(x => x.Id);
+    a.Select.Set(s => new ViewModel { Id = s.Id, Title = s.Title });
+});
+
+//LIST
+IList<Notice> n20 = rep.List<ConfigurationOrderByLimit<Notice>>(a =>
+{
+    a.OrderBy.Add(x => x.Id);
+    a.Page = 1;
+    a.Total = 2;
+});
+IList<ViewModel> n21 = rep.List<ConfigurationOrderBySelect<Notice, ViewModel>, ViewModel>(a =>
+{
+    a.OrderBy.Add(x => x.Id);
+    a.Select.Set(s => new ViewModel { Id = s.Id, Title = s.Title });
+});
+```
+[back](#methods)
+
+___
+
+####Resume:
+
+_Implementation_ `IConfiguration<T>` _and_ `IConfiguration<T, TResult>`
+
+```Csharp
+ConfigurationOrderBy<T>
+ConfigurationOrderByLimit<T>
+ConfigurationOrderByPagination<T>
+ConfigurationOrderByPaginationSelect<T, TResult>
+ConfigurationOrderBySelect<T, TResult>
+ConfigurationOrderBySelectLimit<T, TResult>
+ConfigurationOrderByWhere<T>
+ConfigurationOrderByWherePagination<T>
+ConfigurationOrderByWherePaginationSelect<T, TResult>
+ConfigurationOrderByWhereSelect<T, TResult>
+ConfigurationOrderByWhereSelectLimit<T, TResult>
+ConfigurationWhere<T>
+ConfigurationWhereLimit<T>
+ConfigurationWhereSelect<T, TResult>
+ConfigurationWhereSelectLimit<T, TResult>
+```    
