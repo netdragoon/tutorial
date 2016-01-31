@@ -737,6 +737,9 @@ var result = repTags.Pagination(groupOrderBy, x.Title.Contains(filter), (page ??
 [back](#methods)
 
 ####IConfiguration
+
+_(Version 1.0.3)_
+
 _Implementation_
     
     using Canducci.EntityFramework.Repository.Util;
@@ -774,6 +777,8 @@ IList<Notice> n18 = rep.List(configNotice);
 ____
 
 ####Action
+
+_(Version 1.0.3)_
 
 _Implementation_
     
@@ -826,6 +831,8 @@ ___
 
 ####Resume:
 
+_(Version 1.0.3)_
+
 _Implementation_ `IConfiguration<T>` _and_ `IConfiguration<T, TResult>`
 
 ```Csharp
@@ -844,4 +851,5 @@ ConfigurationWhere<T>
 ConfigurationWhereLimit<T>
 ConfigurationWhereSelect<T, TResult>
 ConfigurationWhereSelectLimit<T, TResult>
+
 ```    
