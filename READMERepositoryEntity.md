@@ -735,3 +735,37 @@ var result = repTags.Pagination(groupOrderBy, x.Title.Contains(filter), (page ??
 
 ```
 [back](#methods)
+
+####IConfiguration
+_Implementation_
+    
+    using Canducci.EntityFramework.Repository.Util;
+
+```Csharp
+//ALL
+IEnumerable<T> All(IConfiguration<T> configuration);
+IList<TResult> All<TResult>(IConfiguration<T, TResult> configuration);
+
+//LIST
+IList<T> List(IConfiguration<T> configuration);
+IList<TResult> List<TResult>(IConfiguration<T, TResult> configuration);
+``` 
+_Usage_   
+```Csharp
+//ALL
+ConfigurationOrderBy<Notice> configNotice = new ConfigurationOrderBy<Notice>();
+configNotice.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.Desc);
+
+IEnumerable<Notice> n9 = rep.All(configNotice);
+
+ConfigurationOrderBySelect<Notice, ViewModel> configNoticeViewModel = new ConfigurationOrderBySelect<Notice, ViewModel>();
+configNoticeViewModel.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.Desc);
+configNoticeViewModel.Select.Set(s => new ViewModel() { Id = s.Id, Title = s.Title });
+
+IList<ViewModel> n10 = rep.All(configNoticeViewModel);
+//LIST
+ConfigurationOrderBy<Notice> configNotice = new ConfigurationOrderBy<Notice>();
+configNotice.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.Desc);
+
+IList<Notice> n18 = rep.List(configNotice);
+```
