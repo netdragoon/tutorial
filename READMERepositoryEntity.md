@@ -752,6 +752,10 @@ IList<TResult> All<TResult>(IConfiguration<T, TResult> configuration);
 //LIST
 IList<T> List(IConfiguration<T> configuration);
 IList<TResult> List<TResult>(IConfiguration<T, TResult> configuration);
+
+//PAGINATION
+IPagedList<T> Pagination(IConfiguration<T, T, IPagedList<T>> configuration);
+IPagedList<TResult> Pagination<TResult>(IConfiguration<T, TResult, IPagedList<TResult>> configuration);
 ``` 
 _Usage_   
 ```Csharp
@@ -767,11 +771,31 @@ configNoticeViewModel.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.
 configNoticeViewModel.Select.Set(s => new ViewModel() { Id = s.Id, Title = s.Title });
 
 IList<ViewModel> n10 = rep.All(configNoticeViewModel);
+
 //LIST
 ConfigurationOrderBy<Notice> configNotice = new ConfigurationOrderBy<Notice>();
 configNotice.OrderBy.Add(x => x.Id, Order.Asc).Add(x => x.TagId, Order.Desc);
 
 IList<Notice> n18 = rep.List(configNotice);
+
+//PAGINATION
+ConfigurationOrderByPagination<Notice> configNotice = 
+                    new ConfigurationOrderByPagination<Notice>();
+configNotice.OrderBy.Add(c => c.Active);
+configNotice.Page = 1;
+configNotice.Total = 2;
+
+IPagedList<Notice> p9 = rep.Pagination(configNotice);
+
+ConfigurationOrderByPaginationSelect<Notice, ViewModel> configNoticeViewModel = 
+                    new ConfigurationOrderByPaginationSelect<Notice, ViewModel>();
+configNoticeViewModel.OrderBy.Add(c => c.Active);
+configNoticeViewModel.Page = 1;
+configNoticeViewModel.Total = 2;
+configNoticeViewModel.Select.Set(s => new ViewModel { Id = s.Id, Title = s.Title });
+
+IPagedList<ViewModel> p10 = rep.Pagination(configNoticeViewModel);
+
 ```
 [back](#methods)
 ____
@@ -796,6 +820,13 @@ IList<T> List<TConfiguration>(Action<TConfiguration> configuration)
             where TConfiguration : IConfiguration<T>;
 IList<TResult> List<TConfiguration, TResult>(Action<TConfiguration> configuration)
     where TConfiguration : IConfiguration<T, TResult>;    
+
+//PAGINATION
+IPagedList<T> Pagination<TConfiguration>(Action<TConfiguration> configuration)
+            where TConfiguration : IConfiguration<T, T, IPagedList<T>>;
+IPagedList<TResult> Pagination<TConfiguration, TResult>(Action<TConfiguration> configuration)
+            where TConfiguration: IConfiguration<T, TResult, IPagedList<TResult>>;
+
 ```                
 _Usage_   
 ```Csharp
@@ -824,6 +855,25 @@ IList<ViewModel> n21 = rep.List<ConfigurationOrderBySelect<Notice, ViewModel>, V
     a.OrderBy.Add(x => x.Id);
     a.Select.Set(s => new ViewModel { Id = s.Id, Title = s.Title });
 });
+
+//PAGINATION
+IPagedList<Notice> p11 = 
+        rep.Pagination<ConfigurationOrderByPagination<Notice>>(a =>
+{
+    a.OrderBy.Add(c => c.Active);
+    a.Page = 1;
+    a.Total = 2;
+});
+
+IPagedList<ViewModel> p12 = 
+        rep.Pagination<ConfigurationOrderByPaginationSelect<Notice, ViewModel>, ViewModel>(a =>
+{
+    a.OrderBy.Add(c => c.Active);
+    a.Page = 1;
+    a.Total = 2;
+    a.Select.Set(s => new ViewModel { Id = s.Id, Title = s.Title });
+});
+
 ```
 [back](#methods)
 
@@ -833,7 +883,7 @@ ___
 
 _(Version 1.0.3)_
 
-_Implementation_ `IConfiguration<T>` _and_ `IConfiguration<T, TResult>`
+_Implementation_ `IConfiguration<T>` _and_ `IConfiguration<T, TResult>` _and_ `IConfiguration<T, T1, TResult>`
 
 ```Csharp
 ConfigurationOrderBy<T>
