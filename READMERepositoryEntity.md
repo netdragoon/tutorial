@@ -201,7 +201,7 @@ ____
 
 ####Methods
 
-| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) | [GroupOrderBy](#grouporderby-version--102) | [CreateAndAttach](#createandattach-version--101) | [IConfiguration](#iconfiguration) | [Action<IConfiguration>](#action) | [IConfiguration Implementation](#resume)
+| [Add](#add)  | [Edit](#edit)  | [Delete](#delete)  | [Find](#find)  | [All](#all) | [List](#list)  | [Pagination](#pagination) | [Count](#count)  | [Create](#create)  | [GroupBy](#groupby) | [Sum](#sum)  | [Query](#query)  | [QueryCommand](#querycommand) | [Save](#save) | [GroupOrderBy](#grouporderby) | [CreateAndAttach](#createandattach) | [IConfiguration](#iconfiguration) | [Action<IConfiguration>](#action) | [IConfiguration Implementation](#resume)
 
 
 _Example class_
@@ -694,7 +694,10 @@ if (tag != null)
 
 ____
 
-####CreateAndAttach (version >= 1.0.1)
+####CreateAndAttach 
+
+_(Version >= 1.0.1)_
+
 _Implementation_
 ```Csharp
 T CreateAndAttach();
@@ -711,7 +714,10 @@ repTags.Save();
 
 ____
 
-####GroupOrderBy (version >= 1.0.2)
+####GroupOrderBy
+
+_(Version 1.0.2)_
+
 _Implementation_
     
     using Canducci.EntityFramework.Repository.Util;
@@ -798,6 +804,7 @@ IPagedList<ViewModel> p10 = rep.Pagination(configNoticeViewModel);
 
 ```
 [back](#methods)
+
 ____
 
 ####Action
