@@ -24,6 +24,11 @@ __Web Service http://viacep.com.br/__
 PM> Install-Package CanducciCep
 
 ```
+#Versão >= 4.0.0
+
+____
+
+#Versão < 4.0.0
 
 ###Como utilizar?
 
