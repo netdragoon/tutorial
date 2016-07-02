@@ -43,7 +43,27 @@ public async Task<IActionResult> Cep(string cep)
 }
 ```
 
-____
+ou
+
+```Csharp
+[HttpPost]
+public async Task<IActionResult> Cep(string cep)
+{
+    ZipCode zipCode = null;
+    if (ZipCode.TryParse(cep, out zipCode))
+    {
+        ZipCodeResult result = await zip.FindAsync(zipCode);
+        ViewData["cep"] = cep;
+        if (result.IsValid)
+        {
+            return View(result.Result);
+        }
+    }
+    return View();
+}
+
+```
+---
 
 ___Versão < 4.0.0___
 
