@@ -24,11 +24,28 @@ __Web Service http://viacep.com.br/__
 PM> Install-Package CanducciCep
 
 ```
-#Versão >= 4.0.0
+___Versão >= 4.0.0___
+###Como utilizar?
+
+Declare o namespace `using Canducci.Zip;` 
+
+```Csharp
+[HttpPost]
+public async Task<IActionResult> Cep(string cep)
+{
+    ZipCodeResult result = await zip.FindAsync(cep);
+    ViewData["cep"] = cep;
+    if (result.IsValid)
+    {
+        return View(result.Result);
+    }
+    return View();
+}
+```
 
 ____
 
-#Versão < 4.0.0
+___Versão < 4.0.0___
 
 ###Como utilizar?
 
