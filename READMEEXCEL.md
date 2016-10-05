@@ -1,6 +1,6 @@
 ##Canducci EXCEL 
 
-####(version: 1.0.0)
+####(version: 1.0.1)
 
 [![Canducci Excel](http://i666.photobucket.com/albums/vv25/netdragoon/1446163380_excel_zps5lhqezet.png)](https://www.nuget.org/packages/Canducci.Excel/)
 
