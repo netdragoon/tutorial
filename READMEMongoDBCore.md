@@ -28,7 +28,7 @@ Create in your `appsettings.json` a section:
     "ConnectionStrings": "mongodb://localhost:27017"
 }
 ```
-In method configureServices do:
+In method `ConfigureServices` do:
 
 ```Csharp
 public void ConfigureServices(IServiceCollection services)
@@ -104,5 +104,25 @@ namespace WebApplication11.Models
         {
         }
     }
+}
+```
+
+Add more configuration in method `ConfigureServices` `services`.**AddScoped**:
+
+- `IConnect` To `Connect`
+- `RepositoryCarrosContract` To `RepositoryCarros`
+
+```Csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.Configure<MongoConnectConfiguration>(Configuration.GetSection("MongoDB"));
+
+    // Add framework services.
+    services.AddApplicationInsightsTelemetry(Configuration);
+
+    services.AddMvc();
+
+    services.AddScoped<IConnect, Connect>();
+    services.AddScoped<RepositoryCarrosContract, RepositoryCarros>();
 }
 ```
