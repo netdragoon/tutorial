@@ -29,7 +29,8 @@ Create in your `appsettings.json` a section:
 }
 ```
 In method configureServices do:
-```
+
+```Csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.Configure<MongoConnectConfiguration>(Configuration.GetSection("MongoDB"));
@@ -40,7 +41,7 @@ these settings are responsible for the connection layer ___Repository___.
 
 ___Make a class that represents your Collection in MongoDB___
 
-```
+```Csharp
 using System;
 using Canducci.MongoDB.Repository.Core;
 using MongoDB.Bson;
