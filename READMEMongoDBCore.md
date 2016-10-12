@@ -16,3 +16,15 @@ To install Canducci MongoDB Repository Core, run the following command in the [P
 PM> Install-Package Canducci.MongoDB.Repository.Core
 
 ```
+
+##How to use?
+
+Create in your `appsettings.json`:
+
+```Csharp
+
+"MongoDB": {
+    "Database": "dbnew",
+    "ConnectionStrings": "mongodb://localhost:27017"
+}
+```
