@@ -19,7 +19,7 @@ PM> Install-Package Canducci.MongoDB.Repository.Core
 
 ##How to use?
 
-Create in your `appsettings.json`:
+Create in your `appsettings.json` a section:
 
 ```Csharp
 
@@ -28,3 +28,10 @@ Create in your `appsettings.json`:
     "ConnectionStrings": "mongodb://localhost:27017"
 }
 ```
+In method configureServices do:
+```
+public void ConfigureServices(IServiceCollection services)
+{
+    services.Configure<MongoConnectConfiguration>(Configuration.GetSection("MongoDB"));
+    
+````
