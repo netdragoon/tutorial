@@ -5,7 +5,7 @@
 
 [![Canducci MongoDB Repository Core](http://i666.photobucket.com/albums/vv25/netdragoon/nosql_zpsefi6szxd.png)](https://www.nuget.org/packages/Canducci.MongoDB.Repository.Core/)
 
-[![NuGet](https://img.shields.io/nuget/v/Canducci.MongoDB.Repository4.5.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.MongoDB.Repository.Core/)
+[![NuGet](https://img.shields.io/nuget/v/Canducci.MongoDB.Repository.Core.svg?style=plastic&label=version)](https://www.nuget.org/packages/Canducci.MongoDB.Repository.Core/)
 
 ##Install Package (NUGET)
 
