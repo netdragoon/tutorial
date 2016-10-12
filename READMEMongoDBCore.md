@@ -126,3 +126,71 @@ public void ConfigureServices(IServiceCollection services)
     services.AddScoped<RepositoryCarrosContract, RepositoryCarros>();
 }
 ```
+###Controller
+
+```Csharp
+public class AutoController : Controller
+{
+	public RepositoryCarrosContract Repository;
+	public AutoController(RepositoryCarrosContract repository)
+	{
+		Repository = repository;
+	}
+
+	[HttpGet()]
+	public IActionResult Index()
+	{
+		return View(Repository.All());
+	}
+
+	[HttpGet()]
+	public IActionResult Create()
+	{
+		return View();
+	}
+
+	[HttpPost()]
+	[ValidateAntiForgeryToken()]
+	public IActionResult Create(Carros carro)
+	{
+		Repository.Add(carro);
+		return RedirectToAction("Index");
+	}
+
+	[HttpGet()]
+	public IActionResult Edit(string id)
+	{
+		ObjectId _id;
+		if (ObjectId.TryParse(id, out _id))
+		{
+			return View(Repository.Find(x => x.Id == _id));
+		}
+		return RedirectToAction("Index");
+	}
+
+	[HttpPost()]
+	[ValidateAntiForgeryToken()]
+	public IActionResult Edit(string id, Carros carro)
+	{
+		ObjectId _id;
+		if (ObjectId.TryParse(id, out _id))
+		{
+			carro.Id = _id;
+			Repository.Edit(x => x.Id == _id, carro);
+		}
+		return RedirectToAction("Index");
+	}
+
+	[HttpGet()]        
+	public IActionResult Delete(string id)
+	{
+		ObjectId _id;
+		if (ObjectId.TryParse(id, out _id))
+		{
+			Repository.Delete(x => x.Id == _id);
+		}
+		return RedirectToAction("Index");
+	}
+
+}
+```
