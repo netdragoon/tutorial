@@ -1,4 +1,4 @@
-#Canducci CEP 
+# Canducci CEP 
 
 __Web Service http://viacep.com.br/__
 
@@ -10,12 +10,6 @@ __Web Service http://viacep.com.br/__
 
 [![Version](https://img.shields.io/nuget/v/CanducciCep.svg?style=plastic&label=version)](https://www.nuget.org/packages/CanducciCep/)
 [![Twitter](https://img.shields.io/twitter/url/http/www.nuget.org/packages/CanducciCep.svg?style=social)](https://twitter.com/intent/tweet?text=NugetCanducciCEP:&url=http%3A%2F%2Fwww.nuget.org%2Fpackages%2FCanducciCep)
-
-#### Informações Nuget
-
-[![NuGet Core Version](https://img.shields.io/nuget/v/Nuget.Core.svg?style=plastic&label=nuget core version)](https://www.nuget.org/)
-[![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Configuration.svg?style=plastic&label=nuget core configuration version)](https://www.nuget.org/)
-[![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Server.svg?style=plastic&label=nuget server version)](https://www.nuget.org/)
 
 ## Instalação do Pacote (NUGET)
 
