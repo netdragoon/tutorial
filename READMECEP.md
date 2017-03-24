@@ -17,7 +17,7 @@ __Web Service http://viacep.com.br/__
 [![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Configuration.svg?style=plastic&label=nuget core configuration version)](https://www.nuget.org/)
 [![NuGet Core Configuration](https://img.shields.io/nuget/v/NuGet.Server.svg?style=plastic&label=nuget server version)](https://www.nuget.org/)
 
-##Instalação do Pacote (NUGET)
+## Instalação do Pacote (NUGET)
 
 ```Csharp
 
@@ -25,7 +25,8 @@ PM> Install-Package CanducciCep
 
 ```
 ___Versão >= 4.0.0___
-###Como utilizar?
+
+### Como utilizar?
 
 Declare o namespace `using Canducci.Zip;` 
 
@@ -67,11 +68,11 @@ public async Task<IActionResult> Cep(string cep)
 
 ___Versão < 4.0.0___
 
-###Como utilizar?
+### Como utilizar?
 
 Declare o namespace `using Canducci.Zip;` 
 
-####Busca das informações pelo CEP informado?
+#### Busca das informações pelo CEP informado?
 
 ```Csharp
 
@@ -96,7 +97,7 @@ catch (ZipCodeException ex)
 
 ```
 
-####Busca de vários CEP informando UF, Cidade e Endereço?
+#### Busca de vários CEP informando UF, Cidade e Endereço?
 
 ```Csharp
 
@@ -123,7 +124,7 @@ catch (ZipCodeException ex)
 
 ```
 
-####Exemplo MVC ASP.NET (com async, await e Task)
+#### Exemplo MVC ASP.NET (com async, await e Task)
 
 ```csharp
 using System.Web.Mvc;
@@ -171,14 +172,14 @@ namespace Canducci.Web4._5._1.Controllers
 
 ```
 
-####Lista de Unidade Federativas do Brasil
+#### Lista de Unidade Federativas do Brasil
 
 ```csharp
 Dictionary<object, object> ufs = ZipCodeLoad.UfToList();
 
 ```
 
-####Verificação de dados válidos para buscas de CEP e Endereços
+#### Verificação de dados válidos para buscas de CEP e Endereços
 
 _CEP_
 
