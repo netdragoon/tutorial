@@ -27,6 +27,7 @@ Create in your web.config in ` appSettings` two configurations ( MongoConnection
 <appSettings>
     <add key="MongoConnectionString" value="mongodb://localhost" />
     <add key="MongoDatabase" value="test" />
+    <add key="MongoDatabaseAzure" value="false"/> // Azure Connection set True.
 
 ```
 
